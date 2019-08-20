@@ -36,8 +36,8 @@ Route::get('/admin/data/kriteria/view/{id}', 'AdminController@kriteriaview')->na
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@kriteriaedit')->name('kriteria.edit');
 
 Route::post('/admin/data/kecamatan/create', 'AdminController@kecamatancreate')->name('kecamatan.create');
-Route::post('/admin/data/kecamatan/update/{id}', 'AdminController@kecamatanupdate')->name('kecamatan.update');
 Route::get('/admin/data/kecamatan/edit/{id}', 'AdminController@kecamatanedit')->name('kecamatan.edit');
+Route::post('/admin/data/kecamatan/update/{id}', 'AdminController@kecamatanupdate')->name('kecamatan.update');
 Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@kecamatandelete')->name('kecamatan.delete');
 
 // Route::get('/logout', 'AdminController@Logout')->name('logouts');

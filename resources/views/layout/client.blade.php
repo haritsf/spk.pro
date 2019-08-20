@@ -28,7 +28,7 @@
   <style>
     @font-face {
       font-family: Product Sans;
-      src: url('fonts/productsans.ttf')
+      src: url({{url('fonts/productsans.ttf')}});
     }
   </style>
 

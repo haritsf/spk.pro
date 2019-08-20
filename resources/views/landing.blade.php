@@ -13,13 +13,12 @@ $countkriterias = Kustom::CountKriterias();
             <div class="text text-center text-lg-left animated fadeInUp delay-0.5s">
                 <h1>Sistem Pendukung Keputusan</h1>
                 <p>
-                    promethee akan mempercepat kamu dalam mengambil keputusan, tentukan kasusmu dan klienmu akan menyukainya.
+                    promethee akan mempercepat kamu dalam mengambil keputusan, tentukan kasusmu dan klienmu akan
+                    menyukainya.
                 </p>
-                <div class="cta">
-                    &nbsp;
-                    <div class="mt-3 text-job">
-                        With Stisla &nbsp;&nbsp;&bull;&nbsp;&nbsp; Version: 2.2.0
-                    </div>
+                <div class="cta animated fadeInUp delay-1s" id="nav"">
+                    <a class=" btn btn-warning btn-md btn-icon icon-right" href="#stats">Lanjut <i
+                        class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
             <div class="image d-none d-lg-block animated fadeInUp delay-1s">
@@ -35,7 +34,7 @@ $countkriterias = Kustom::CountKriterias();
             <div class="text-job text-muted text-14">not a reason to use promethee</div>
             <div class="h1 mb-0 font-weight-bold"><span class="font-weight-500">just a </span>statistic</div>
         </div>
-        <div class="col-4 col-md-2 text-center">
+        <div class="col-4 col-md-2 text-center" id="stats">
             <div class="h2 font-weight-bold">
                 {{ $countalternatifs*$countkriterias }}
             </div>

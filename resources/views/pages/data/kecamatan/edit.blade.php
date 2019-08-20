@@ -8,9 +8,8 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-6">
-    <form action="#" method="post" class="form">
-    {{-- <form action="{{route('kecamatan.update')}}" method="post" class="form"> --}}
-      @csrf
+    <form action="{{route('kecamatan.update', $alternatif->id)}}" method="POST" class="form">
+      {{ csrf_field() }}
       <br>
       <div class="form-group">
         <h5 class="label-control">ID Kecamatan</h5>
@@ -22,9 +21,9 @@
       </div>
       <div class="form-group">
         <h5 class="label-control">Kode</h5>
-        <input class="form-control" type="text" name="code" value="{{$alternatif->kode}}">
+        <input class="form-control" type="text" name="kode" value="{{$alternatif->kode}}">
       </div>
-      <button class="btn btn-success btn-md" type="submit" id="swal-2">Proses</button>
+      <button class="btn btn-success btn-md" type="submit">Proses</button>
     </form>
   </div>
   <div class="col"></div>

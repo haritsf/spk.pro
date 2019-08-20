@@ -21,11 +21,25 @@
             </div>
             <div class="form-group">
                 <h5 class="label-control">Parameter</h5>
-                <input class="form-control" type="text" name="code" value="{{$kriteria->minmaks}}">
+                <select class="form-control">
+                    {{-- @foreach ($kriteria as $item) --}}
+                    <option name="minmaks" value="{{$kriteria->minmaks}}">{{ $kriteria->minmaks }}</option>
+                    {{-- @endforeach --}}
+                    {{-- <option>Option 2</option>
+                                <option>Option 3</option> --}}
+                </select>
+                {{-- <input class="form-control" type="text" name="code" value="{{$kriteria->minmaks}}"> --}}
             </div>
             <div class="form-group">
                 <h5 class="label-control">Tipe</h5>
-                <input class="form-control" type="text" name="code" value="{{$kriteria->pref}}">
+                <select class="form-control">
+                    {{-- @foreach ($kriteria as $item) --}}
+                    <option name="pref" value="{{$kriteria->pref}}">{{ $kriteria->pref }}</option>
+                    {{-- @endforeach --}}
+                    {{-- <option>Option 2</option>
+                                                <option>Option 3</option> --}}
+                </select>
+                {{-- <input class="form-control" type="text" name="code" value="{{$kriteria->pref}}"> --}}
             </div>
             <div class="form-group">
                 <h5 class="label-control">q</h5>

@@ -111,12 +111,13 @@ class AdminController extends Controller
         return view('pages/data/kecamatan/edit', ['alternatif' => $alternatif]);
     }
 
-    public function kecamatanupdate($id)
+    public function kecamatanupdate(Request $request)
     {
-        $alternatif = Alternatif::find($id);
-        dd($alternatif);
-        // $alternatif->name = 'New Flight Name';
-        // return view('pages/data/kecamatan/view', ['alternatif' => $alternatif]);
+        DB::table('alternatifs')->where('id', $request->id)->update([
+            'nama' => $request->nama,
+            'kode' => $request->kode
+        ]);
+        return redirect(route('kecamatan.read'))->with('info', 'Kecamatan Berhasil di Update');
     }
 
     public function kecamatandelete($id)

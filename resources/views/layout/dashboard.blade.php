@@ -18,7 +18,7 @@
   <style>
     @font-face {
       font-family: Product Sans;
-      src: url('fonts/productsans.ttf')
+      src: url({{url('fonts/productsans.ttf')}});
     }
   </style>
 
@@ -73,17 +73,15 @@
           <div class="dropdown-menu dropdown-list dropdown-menu-right shadow rounded">
           </div>
         </li>
-        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <li class="dropdown"><a href="#" data-toggle="dropdown"
+            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="{{url('img/avatar/avatar-1.png')}}" class="rounded-circle mr-2">
             <div class="d-sm-none d-lg-inline-block">Hi, {{Auth::user()->username}}</div>
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow rounded">
             <div class="dropdown-title">Logged in 4 years ago</div>
-            <a href="features-profile.html" class="dropdown-item has-icon">
+            <a href="#" class="dropdown-item has-icon">
               <i class="far fa-user"></i> Profile
-            </a>
-            <a href="features-settings.html" class="dropdown-item has-icon">
-              <i class="fas fa-cog"></i> Settings
             </a>
             <div class="dropdown-divider"></div>
             <a href="{{route('logout')}}" class="dropdown-item has-icon text-danger">
@@ -134,16 +132,35 @@
               @endforeach
             </ul>
           </li>
-          <li class="nav-item dropdown"><a href="{{route('analisa.read')}}" class="nav-link"><i
-                class="fas fa-edit"></i><span>Analisa</span></a>
+          <li class="menu-header">Step by Step</li>
+          <li class="nav-item dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i
+                class="fas fa-diagnoses"></i><span>PROMETHEE</span></a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a href="#" class="nav-link">Deviasi</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Indeks Preferensi</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Leaving Flow</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Entering Flow</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Net Flow</a>
+              </li>
+            </ul>
           </li>
           <?php
               if (Auth::user()->role == "Adminstrator") 
               { ?>
-                <li class="menu-header">Options</li>
-                <li class="nav-item"><a href="{{route('pengguna.read')}}" class="nav-link"><i
-                      class="far fa-user"></i><span>Users</span></a>
-                </li>
+          <li class="menu-header">Options</li>
+          <li class="nav-item"><a href="{{route('pengguna.read')}}" class="nav-link"><i
+                class="far fa-user"></i><span>Users</span></a>
+          </li>
           <?php    }
           ?>
         </ul>
