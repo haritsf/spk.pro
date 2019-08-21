@@ -81,8 +81,7 @@
                 <td>{{$data->kode }}</td>
                 <td>
                   <a class="btn btn-warning btn-md" href="{{route('kecamatan.edit',$data->id)}}">Edit</a>
-                  <a class="btn btn-danger btn-md" href="{{route('kecamatan.delete',$data->id)}}"
-                    data-confirm="Apakah anda yakin ingin menghapus Kecamatan {{ $data->nama }}?">Delete</a>
+                  <a class="btn btn-danger btn-md" href="{{route('kecamatan.delete',$data->id)}}">Delete</a>
                 </td>
               </tr>
               @endforeach

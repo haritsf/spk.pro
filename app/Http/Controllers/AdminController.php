@@ -11,6 +11,7 @@ use App\Evaluasi;
 use App\Pengguna;
 use App\User;
 use Session;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -68,11 +69,43 @@ class AdminController extends Controller
 
     public function Pengguna()
     {
-        $getpenggunas = User::get();
-        return view(
-            'pages/admin/users',
-            ['getpenggunas' => $getpenggunas]
-        );
+        $datas = User::get();
+        return view('pages/admin/users', compact('datas'));
+    }
+
+    public function CreatePengguna(Request $request)
+    {
+        $data = new User();
+        $data->username = $request->username;
+        $data->password = Hash::make($request->password);
+        $data->alias = $request->alias;
+        $data->role = $request->role;
+        $data->save();
+        return back()->with('success', 'User berhasil dibuat');
+    }
+
+    public function EditPengguna($id)
+    {
+        $data = User::find($id);
+        return view('pages.admin.editusers', compact('data'));
+    }
+
+    public function UpdatePengguna(Request $request)
+    {
+        $update = User::find($request->id);
+        $update->username = $request->username;
+        $update->alias = $request->alias;
+        $update->role = $request->role;
+        $update->save();
+        return redirect(route('pengguna.read'))->with('success', 'User berhasil dibuat');
+    }
+
+    public function DeletePengguna(Request $request)
+    {
+        $data = User::find($request->id);
+        $data->delete();
+        return back()->with('success', 'User berhasil dihapus');
+
     }
 
     // <------------------------------------------------------->
