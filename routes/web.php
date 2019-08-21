@@ -29,6 +29,9 @@ Route::post('/admin/user/post', 'AdminController@CreatePengguna')->name('penggun
 Route::get('/admin/user/{id}', 'AdminController@EditPengguna')->name('pengguna.edit');
 Route::post('/admin/user/{id}/update', 'AdminController@UpdatePengguna')->name('pengguna.update');
 Route::post('/admin/user/delete', 'AdminController@DeletePengguna')->name('pengguna.delete');
+Route::get('/profile/{id}', 'AdminController@EditProfile')->name('profile.edit');
+Route::post('/profile/{id}/post', 'AdminController@UpdateProfile')->name('profile.update');
+
 
 
 

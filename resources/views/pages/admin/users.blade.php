@@ -3,7 +3,7 @@
 <div class="container">
     @section('pages','view')
     
-    @section('title','user')
+    @section('title','users')
 
 @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -82,7 +82,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow rounded">
             <div class="dropdown-title">Logged in 4 years ago</div>
-            <a href="#" class="dropdown-item has-icon">
+            <a href="{{route('profile.edit', Auth::user()->id)}}" class="dropdown-item has-icon">
               <i class="far fa-user"></i> Profile
             </a>
             <div class="dropdown-divider"></div>
