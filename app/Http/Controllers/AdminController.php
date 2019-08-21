@@ -19,30 +19,12 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-    // public function Login()
-    // {
-    //     return view('pages/admin/login');
-    // }
-
-    // public function Logout()
-    // {
-    //     $session = array(
-    //         'nama'  => session('nama'),
-    //         'user'  => session('user'),
-    //     );
-    //     $hancur = session()->flush();
-
-    //     Session::flush();
-    //     return redirect(route('landing'));
-    //     return view('landing');
-    // }
-
-    public function dashboard()
+    public function Dashboard()
     {
         return view('layout/dashboard');
     }
 
-    public function home()
+    public function Home()
     {
         $countalternatifs = Alternatif::count();
         $countkriterias = Kriteria::count();
@@ -54,24 +36,24 @@ class AdminController extends Controller
         );
     }
 
-    public function pemalang()
+    public function Pemalang()
     {
         return view('pages/admin/pemalang');
     }
 
-    public function kecamatanread()
+    public function KecamatanRead()
     {
         $alternatifs = Alternatif::all();
         return view('pages/data/kecamatan/view', ['alternatifs' => $alternatifs]);
     }
 
-    public function kriteriaread()
+    public function KriteriaRead()
     {
         $kriterias = Kriteria::all();
         return view('pages/data/kriteria', ['kriterias' => $kriterias]);
     }
 
-    public function preferensi()
+    public function Preferensi()
     {
         $data = [
             'prefs' => DB::table('prefs')->get()
@@ -79,12 +61,12 @@ class AdminController extends Controller
         return view('pages/data/preferensi', $data);
     }
 
-    public function analisa()
+    public function Analisa()
     {
         return view('pages/admin/analisa');
     }
 
-    public function pengguna()
+    public function Pengguna()
     {
         $getpenggunas = User::get();
         return view(
@@ -95,7 +77,7 @@ class AdminController extends Controller
 
     // <------------------------------------------------------->
 
-    public function kecamatancreate(Request $request)
+    public function KecamatanCreate(Request $request)
     {
         $id = $request->id;
         $nama = $request->nama;
@@ -104,14 +86,14 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Kecamatan Berhasil di Tambah');
     }
 
-    public function kecamatanedit($id)
+    public function KecamatanEdit($id)
     {
         $alternatif = Alternatif::find($id);
         // dd($alternatif);
         return view('pages/data/kecamatan/edit', ['alternatif' => $alternatif]);
     }
 
-    public function kecamatanupdate(Request $request)
+    public function KecamatanUpdate(Request $request)
     {
         DB::table('alternatifs')->where('id', $request->id)->update([
             'nama' => $request->nama,
@@ -120,7 +102,7 @@ class AdminController extends Controller
         return redirect(route('kecamatan.read'))->with('info', 'Kecamatan Berhasil di Update');
     }
 
-    public function kecamatandelete($id)
+    public function KecamatanDelete($id)
     {
         DB::table('alternatifs')->where('id', $id)->delete();
         return redirect()->back()->with('danger', 'Kecamatan Berhasil di Hapus');
@@ -128,7 +110,7 @@ class AdminController extends Controller
 
     // <------------------------------------------------------->
 
-    public function kriteriaview($id)
+    public function KriteriaView($id)
     {
         // $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
         $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai', 'klasifikasis.klasifikasi')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->where('evals.kriteria', '=', $id)->get();
@@ -138,7 +120,7 @@ class AdminController extends Controller
         return view('pages/data/kriteria/view', ['datas' => $datas], ['getkriteria' => $getkriteria]);
     }
 
-    public function kriteriaedit($id)
+    public function KriteriaEdit($id)
     {
         $kriteria = Kriteria::find($id);
         // dd($kriteria);
