@@ -156,5 +156,22 @@ class AdminController extends Controller
         $update->nilai = $request->nilai;
         $update->save();
         return back()->with('success', 'Nilai berhasil di Update');
+=======
+    public function EditProfile($id)
+    {
+        $data = User::find($id);
+        return view('pages.profile', compact('data'));
+    }
+
+    public function UpdateProfile(Request $request)
+    {
+        $update = User::find($request->id);
+        $update->username = $request->username;
+        $update->alias = $request->alias;
+        $update->role = $request->role;
+        $update->save();
+
+        return back()->with('success', 'Profile berhasil diupdate');
+>>>>>>> Stashed changes
     }
 }
