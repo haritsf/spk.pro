@@ -37,7 +37,6 @@ Route::get('/admin/data/kriteria', 'AdminController@KriteriaRead')->name('kriter
 Route::get('/admin/data/preferensi', 'AdminController@Preferensi')->name('preferensi.read');
 
 // KRITERIA
-<<<<<<< Updated upstream
 Route::get('/admin/data/kriteria/view/{id}', 'AdminController@KriteriaView')->name('kriteria.view');
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@KriteriaEdit')->name('kriteria.edit');
 Route::post('/admin/data/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
@@ -46,11 +45,6 @@ Route::post('/admin/data/kecamatan/create', 'AdminController@KecamatanCreate')->
 Route::get('/admin/data/kecamatan/edit/{id}', 'AdminController@KecamatanEdit')->name('kecamatan.edit');
 Route::post('/admin/data/kecamatan/update/{id}', 'AdminController@KecamatanUpdate')->name('kecamatan.update');
 Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@KecamatanDelete')->name('kecamatan.delete');
-=======
-Route::get('/admin/data/kriteria/view/{id}', 'AdminController@kriteriaview')->name('kriteria.view');
-Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@kriteriaedit')->name('kriteria.edit');
-Route::post('/admin/data/kriteria/update', 'AdminController@kriteriaupdate')->name('kriteria.update');
->>>>>>> Stashed changes
 
 
 
