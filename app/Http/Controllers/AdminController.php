@@ -108,8 +108,6 @@ class AdminController extends Controller
 
     }
 
-    // <------------------------------------------------------->
-
     public function KecamatanCreate(Request $request)
     {
         $id = $request->id;
@@ -140,8 +138,6 @@ class AdminController extends Controller
         DB::table('alternatifs')->where('id', $id)->delete();
         return redirect()->back()->with('danger', 'Kecamatan Berhasil di Hapus');
     }
-
-    // <------------------------------------------------------->
 
     public function KriteriaView($id)
     {
