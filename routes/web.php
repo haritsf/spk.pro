@@ -14,10 +14,10 @@
 // use Illuminate\Support\Facades\Route;
 
 // CLIENT
-Route::get('/', 'ClientController@landing')->name('landing');
-Route::get('/data', 'ClientController@data')->name('client.data');
-Route::get('/analisa', 'ClientController@analisa')->name('client.analisa');
-Route::get('/pemalang', 'ClientController@pemalang')->name('client.pemalang');
+Route::get('/', 'ClientController@Landing')->name('landing');
+Route::get('/data', 'ClientController@Data')->name('client.data');
+Route::get('/analisa', 'ClientController@Analisa')->name('client.analisa');
+Route::get('/pemalang', 'ClientController@Pemalang')->name('client.pemalang');
 
 // ADMIN
 // Route::get('/admin/login', 'AdminController@Login')->name('admin.login');

@@ -11,12 +11,12 @@ use App\Evaluasi;
 
 class ClientController extends Controller
 {
-    public function landing()
+    public function Landing()
     {
         return view('landing');
     }
 
-    public function data()
+    public function Data()
     {
         $getalternatifs = Alternatif::get();
         $getkriterias = Kriteria::get();
@@ -28,12 +28,12 @@ class ClientController extends Controller
         );
     }
 
-    public function analisa()
+    public function Analisa()
     {
         return view('pages/client/analisa');
     }
 
-    public function pemalang()
+    public function Pemalang()
     {
         return view('pages/client/pemalang');
     }
