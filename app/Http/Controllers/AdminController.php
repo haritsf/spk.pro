@@ -177,11 +177,11 @@ class AdminController extends Controller
 
     public function UpdateProfile(Request $request)
     {
-        dd($request->all());
+        $update = User::find($request->id);
         $update->username = $request->username;
         $update->alias = $request->alias;
         $update->role = $request->role;
-        $update-save();
+        $update->save();
         return back()->with('success', 'Berhasil diupdate');
 
     }
