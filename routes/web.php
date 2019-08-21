@@ -39,6 +39,7 @@ Route::get('/admin/data/preferensi', 'AdminController@Preferensi')->name('prefer
 // KRITERIA
 Route::get('/admin/data/kriteria/view/{id}', 'AdminController@KriteriaView')->name('kriteria.view');
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@KriteriaEdit')->name('kriteria.edit');
+Route::post('/admin/data/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
 
 Route::post('/admin/data/kecamatan/create', 'AdminController@KecamatanCreate')->name('kecamatan.create');
 Route::get('/admin/data/kecamatan/edit/{id}', 'AdminController@KecamatanEdit')->name('kecamatan.edit');

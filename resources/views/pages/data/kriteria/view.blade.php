@@ -8,6 +8,14 @@
 @extends('layout.dashboard')
 @section('content')
 <div class="container">
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     @section('pages','kriteria')
     @section('title',$getkriteria->nama)
 
@@ -51,7 +59,7 @@
                             <th>Klasifikasi</th>
                             <th>Opsi</th>
                         </tr>
-                    </thead>
+                    </thead>    
 
                     <tbody>
                         @foreach ($datas as $data)
@@ -70,8 +78,9 @@
                                                 <h5 class="modal-title">Edit {{$getkriteria->nama}}</h5>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="">
+                                            <form action="{{route('kriteria.update')}}" method="POST">
                                                     @csrf
+                                                <input type="hidden" name="id" value="{{$data->id}}">
                                                     <br>
                                                     <div class="form-group">
                                                         <h5 class="label-control">Kecamatan</h5>
@@ -85,12 +94,13 @@
                                                         <h5 class="label-control">Klasifikasi</h5>
                                                         <input disabled class="form-control" type="text" value="{{$data->klasifikasi}}">
                                                     </div>
-                                                </form>
                                             </div>
                                             <div class="modal-footer bg-whitesmoke br">
                                                 <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Tutup</button>
-                                                <button disabled type="button" class="btn btn-md btn-success">Simpan</button>
+                                                <button type="submit" class="btn btn-md btn-success">Simpan</button>
                                             </div>
+                                            
+                                        </form>
                                         </div>
                                     </div>
                                 </div>

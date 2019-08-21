@@ -6,7 +6,7 @@
 <div class="container">
   @if ($message = Session::get('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>{{$message}}</strong>
+    {{$message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -14,7 +14,7 @@
 
   @elseif($message = Session::get('danger'))
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>{{$message}}</strong>
+    {{$message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -22,7 +22,7 @@
 
   @elseif($message = Session::get('info'))
   <div class="alert alert-info alert-dismissible fade show" role="alert">
-    <strong>{{$message}}</strong>
+    {{$message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -50,7 +50,7 @@
             <h5 class="label-control">Kode</h5>
             <input class="form-control" type="text" name="kode" placeholder="...">
           </div>
-          <button class="btn btn-success btn-sm" type="submit">Proses</button>
+          <button class="btn btn-success btn-md" type="submit">Proses</button>
         </form>
       </div>
     </div>
