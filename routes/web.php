@@ -32,9 +32,6 @@ Route::post('/admin/user/delete', 'AdminController@DeletePengguna')->name('pengg
 Route::get('/profile/{id}', 'AdminController@EditProfile')->name('profile.edit');
 Route::post('/profile/{id}/post', 'AdminController@UpdateProfile')->name('profile.update');
 
-
-
-
 Route::get('/admin/data/kecamatan', 'AdminController@KecamatanRead')->name('kecamatan.read');
 Route::get('/admin/data/kriteria', 'AdminController@KriteriaRead')->name('kriteria.read');
 Route::get('/admin/data/preferensi', 'AdminController@Preferensi')->name('preferensi.read');

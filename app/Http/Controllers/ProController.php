@@ -52,13 +52,13 @@ class ProController extends Controller
     //     return view('pages/promethee/deviasi', ['subs' => $subs]);
     // }
 
-    public function deviasi($joins, $x, $y)
+    public function Deviasi($joins, $x, $y)
     {
         $nilaideviasi = $joins[$x]['nilai'] - $joins[$y]['nilai'];
         return $nilaideviasi;
     }
 
-    public function viewdeviasi()
+    public function ViewDeviasi()
     {
         for ($id = 1; $id <= Kustom::CountKriterias(); $id++) {
             $getjoins = ProController::joinevaluasi($id);
@@ -68,7 +68,7 @@ class ProController extends Controller
         return view('pages/promethee/deviasi', ['showdeviasi' => $showdeviasi]);
     }
 
-    public function joinevaluasi($id)
+    public function JoinEvaluasi($id)
     {
         $joins = DB::table('evals')->select('evals.id as id', 'alternatifs.nama as alternatif', 'kriterias.nama as kriteria', 'kriterias.bobot', 'evals.nilai as nilai')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->where('kriterias.id', '=', $id)->get();
         return $joins;
