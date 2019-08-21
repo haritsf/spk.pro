@@ -40,6 +40,9 @@ Route::get('/admin/data/kecamatan/edit/{id}', 'AdminController@kecamatanedit')->
 Route::post('/admin/data/kecamatan/update/{id}', 'AdminController@kecamatanupdate')->name('kecamatan.update');
 Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@kecamatandelete')->name('kecamatan.delete');
 
+// PROMETHEE
+Route::get('/admin/pro/deviasi', 'ProController@viewdeviasi')->name('pro.deviasi');
+
 // Route::get('/logout', 'AdminController@Logout')->name('logouts');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');

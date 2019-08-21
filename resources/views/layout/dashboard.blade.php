@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" type="image/png" href="{{url('img/logo.png')}}" sizes="32x32">
+  {{-- <link rel="icon" type="image/png" href="{{url('img/logo.png')}}" sizes="32x32"> --}}
+  <link rel="icon" type="image/png" href="{{url('img/favicon-32x32.png')}}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{url('img/favicon-16x16.png')}}" sizes="16x16">
   <title>spk.pro - @yield('title')</title>
 
   <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}">
@@ -138,7 +140,7 @@
                 class="fas fa-diagnoses"></i><span>PROMETHEE</span></a>
             <ul class="dropdown-menu">
               <li class="nav-item">
-                <a href="#" class="nav-link">Deviasi</a>
+                <a href="{{route('pro.deviasi')}}" class="nav-link">Deviasi</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">Indeks Preferensi</a>
@@ -197,7 +199,7 @@
 
     {{-- <script src="{{url('modules/sweetalert/sweetalert.min.js')}}"></script> --}}
     {{-- <script src="{{url('js/page/modules-sweetalert.js')}}"></script> --}}
-    <script src="{{url('js/page/modules-toastr.js')}}"></script>
+    {{-- <script src="{{url('js/page/modules-toastr.js')}}"></script> --}}
 </body>
 
 </html>
