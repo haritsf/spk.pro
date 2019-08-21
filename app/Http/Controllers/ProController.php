@@ -14,28 +14,63 @@ use App\User;
 
 class ProController extends Controller
 {
-    public function joinevaluasi($id)
+    public function __construct()
     {
-        $joins = DB::table('evals')->select('evals.id as id', 'alternatifs.nama as alternatif', 'kriterias.nama as kriteria', 'evals.nilai as nilai')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->where('kriterias.id', '=', $id)->get();
-        // dd($joins);
-        // return view('pages/promethee/deviasi', ['joins' => $joins]);
-        return $joins;
+        $this->middleware('auth');
     }
+    // public function viewdeviasi()
+    // {
+    //     for ($id = 1; $id <= Kustom::CountKriterias(); $id++) {
+    //         $getjoins = ProController::joinevaluasi($id);
+    //         $showdeviasi[] = $getjoins;
+    //     }
+    //     // dd($showdeviasi);
+    //     return view('pages/promethee/deviasi', ['showdeviasi' => $showdeviasi]);
+    // }
 
-    public function deviasi($getjoins, $x, $y){
-        $nilaideviasi = $getjoins[$x]['nilai'] - $getjoins[$y]['nilai'];
+    // public function deviasi()
+    // {
+    //     for ($id = 1; $id <= Kustom::CountKriterias(); $id++) {
+    //         $getjoins = ProController::joinevaluasi($id);
+    //         $showdeviasi[] = $getjoins;
+    //     }
+    //     foreach ($showdeviasi as $deviasi => $value) {
+    //         for ($x = 0; $x < Kustom::CountAlternatifs(); $x++) {
+    //             for ($y = 0; $y < Kustom::CountAlternatifs(); $y++) {
+    //                 $subs[] = ($value[$x]->nilai) - ($value[$y]->nilai);
+    //             }
+    //         }
+    //     }
+    //     // var_dump($subs);
+    //     return $subs;
+    // }
+
+    // public function viewdeviasi()
+    // {
+    //     $subs = ProController::deviasi();
+    //     // dd($subs);
+    //     return view('pages/promethee/deviasi', ['subs' => $subs]);
+    // }
+
+    public function deviasi($joins, $x, $y)
+    {
+        $nilaideviasi = $joins[$x]['nilai'] - $joins[$y]['nilai'];
         return $nilaideviasi;
     }
 
     public function viewdeviasi()
     {
-        for ($x = 1; $x <= Kustom::CountAlternatifs(); $x++) {
-            for ($y = 1; $y <= Kustom::CountAlternatifs(); $y++) {
-                for ($id = 1; $id <= Kustom::CountKriterias(); $id++) {
-                    $getjoins = ProController::joinevaluasi($id);
-                }
-            }
+        for ($id = 1; $id <= Kustom::CountKriterias(); $id++) {
+            $getjoins = ProController::joinevaluasi($id);
+            $showdeviasi[] = $getjoins;
         }
-        return view('pages/promethee/deviasi', ['getjoins' => $getjoins]);
+        // dd($showdeviasi);
+        return view('pages/promethee/deviasi', ['showdeviasi' => $showdeviasi]);
+    }
+
+    public function joinevaluasi($id)
+    {
+        $joins = DB::table('evals')->select('evals.id as id', 'alternatifs.nama as alternatif', 'kriterias.nama as kriteria', 'evals.nilai as nilai')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->where('kriterias.id', '=', $id)->get();
+        return $joins;
     }
 }
