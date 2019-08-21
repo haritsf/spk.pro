@@ -145,7 +145,11 @@ class AdminController extends Controller
         return view('pages/data/kriteria/edit', ['kriteria' => $kriteria]);
     }
 
+<<<<<<< Updated upstream
     public function KriteriaUpdate(Request $request)
+=======
+    public function kriteriaupdate(Request $request)
+>>>>>>> Stashed changes
     {
         // dd($request->all());
         $update = Evaluasi::find($request->id);
