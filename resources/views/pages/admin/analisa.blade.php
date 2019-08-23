@@ -2,10 +2,10 @@
 
 @section('content')
 <?php
-  DEFINE('DBUSER', 'phpmyadmin');
-  DEFINE('DBPW', 'admin123');
+  DEFINE('DBUSER', 'root');
+  DEFINE('DBPW', '');
   DEFINE('DBHOST', 'localhost');
-  DEFINE('DBNAME', 'spk-promethee');
+  DEFINE('DBNAME', 'promethee');
   
   $koneksi = new mysqli(DBHOST, DBUSER, DBPW, DBNAME);
   if ($koneksi) {
@@ -75,21 +75,21 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
       break;
     case '4':
       // Level
-      if ($nilaiAbsolut <= $q[$no]) {
+      if ($nilaiDeviasi <= $q[$no]) {
         $preferensi = 0;
-      } elseif ($q[$no] < $nilaiAbsolut and $nilaiAbsolut <= $p[$no]) {
+      } elseif ($q[$no] < $nilaiDeviasi and $nilaiDeviasi <= $p[$no]) {
         $preferensi = 0.5;
-      } elseif ($p[$no] < $nilaiAbsolut) {
+      } elseif ($p[$no] < $nilaiDeviasi) {
         $preferensi = 1;
       }
       break;
     case '5':
       // Area
-      if ($nilaiAbsolut <= $q[$no]) {
+      if (abs($nilaiDeviasi) <= $q[$no]) {
         $preferensi = 0;
-      } elseif ($q[$no] < $nilaiAbsolut and $nilaiAbsolut <= $p[$no]) {
-        $preferensi = ($nilaiAbsolut - $q[$no]) / ($p[$no] - $q[$no]);
-      } elseif ($p[$no] < $nilaiAbsolut) {
+      } elseif ($q[$no] < abs($nilaiDeviasi) and abs($nilaiDeviasi) <= $p[$no]) {
+        $preferensi = (abs($nilaiDeviasi) - $q[$no]) / ($p[$no] - $q[$no]);
+      } elseif ($p[$no] < abs($nilaiDeviasi)) {
         $preferensi = 1;
       }
       break;

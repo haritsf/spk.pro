@@ -17,7 +17,8 @@
                                 <td>A</td>
                                 <td>B</td>
                                 <td>Kriteria</td>
-                                <td>Nilai</td>
+                                <td>Deviasi</td>
+                                <td>Absolut</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +26,9 @@
                             @foreach ($showdeviasi as $deviasi => $value)
                             @for ($x = 0; $x < Kustom::CountAlternatifs(); $x++)
                             @for ($y=0; $y < Kustom::CountAlternatifs(); $y++)
+                            @php
+                                $d = ($value[$x]->nilai)-($value[$y]->nilai);
+                            @endphp
                             <tr align="center">
                                 <td>{{$no++}}</td>
                                 <td>{{$value[$x]->alternatif}}</td>
@@ -32,7 +36,8 @@
                                 <td>{{$value[$x]->nilai}}</td>
                                 <td>{{$value[$y]->nilai}}</td>
                                 <td>{{$value[$y]->kriteria}}</td>
-                                <td>{{($value[$x]->nilai)-($value[$y]->nilai)}}</td>
+                                <td>{{$d}}</td>
+                                <td>{{abs($d)}}</td>
                             </tr>
                             @endfor
                             @endfor

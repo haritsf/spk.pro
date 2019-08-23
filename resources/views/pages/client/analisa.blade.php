@@ -1,8 +1,8 @@
 <?php
-  DEFINE('DBUSER', 'phpmyadmin');
-  DEFINE('DBPW', 'admin123');
+  DEFINE('DBUSER', 'root');
+  DEFINE('DBPW', '');
   DEFINE('DBHOST', 'localhost');
-  DEFINE('DBNAME', 'spk-promethee');
+  DEFINE('DBNAME', 'promethee');
   
   $koneksi = new mysqli(DBHOST, DBUSER, DBPW, DBNAME);
   if ($koneksi) {
@@ -168,7 +168,7 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
     <div class="col-lg-8">
       <div class="card shadow rounded" id="analisa">
         <div class="card-header">
-          <h2>Matriks Persebaran</h2>
+          <h2>Data Persebaran</h2>
         </div>
         <div class="card-body">
           <div class="table-responsive">

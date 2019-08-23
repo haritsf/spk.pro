@@ -2,11 +2,6 @@
 
 @section('content')
 
-@php
-$countalternatifs = Kustom::CountAlternatifs();
-$countkriterias = Kustom::CountKriterias();
-@endphp
-
 <div class="hero-wrapper">
     <div class="hero">
         <div class="container">

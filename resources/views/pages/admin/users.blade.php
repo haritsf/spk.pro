@@ -1,13 +1,13 @@
 @extends('layout.dashboard')
 @section('content')
 <div class="container">
-    @section('pages','view')
+    @section('pages','manage')
     
     @section('title','users')
 
 @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{$message}}</strong>
+        {{$message}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -16,7 +16,7 @@
 
     <div class="card shadow rounded">
         <div class="card-body">
-          <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseTambah"
+          <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#collapseTambah"
             aria-expanded="false" aria-controls="collapseTambah">
             Tambah
           </button>
@@ -35,7 +35,7 @@
               </div>
                 <div class="form-group mr-3">
                     <h5 class="label-control">Role</h5>
-                    <select class="form-control select2" name="role" required>
+                    <select class="form-control select2" style="width: 50%" name="role" required>
                         <option value="Adminstrator">Adminstrator</option>
                         <option value="Manager">Manager</option>
                     </select>
@@ -44,7 +44,7 @@
                 <h5 class="label-control">Alias</h5>
                 <input class="form-control" type="text" name="alias" placeholder="Alias..." required>
               </div>
-              <button class="btn btn-success btn-sm" type="submit">Proses</button>
+              <button class="btn btn-success btn-md" type="submit">Proses</button>
             </form>
           </div>
         </div>

@@ -41,15 +41,19 @@ Route::get('/admin/data/kriteria/view/{id}', 'AdminController@KriteriaView')->na
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@KriteriaEdit')->name('kriteria.edit');
 Route::post('/admin/data/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
 
+
+// KECAMATAN
 Route::post('/admin/data/kecamatan/create', 'AdminController@KecamatanCreate')->name('kecamatan.create');
 Route::get('/admin/data/kecamatan/edit/{id}', 'AdminController@KecamatanEdit')->name('kecamatan.edit');
 Route::post('/admin/data/kecamatan/update/{id}', 'AdminController@KecamatanUpdate')->name('kecamatan.update');
 Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@KecamatanDelete')->name('kecamatan.delete');
 
-
-
 // PROMETHEE
 Route::get('/admin/pro/deviasi', 'ProController@ViewDeviasi')->name('pro.deviasi');
+Route::get('/admin/pro/indekspref', 'ProController@ViewPreferensi')->name('pro.preferensi');
+Route::get('/admin/pro/leaving', 'ProController@ViewLeaving')->name('pro.leaving');
+Route::get('/admin/pro/entering', 'ProController@ViewEntering')->name('pro.entering');
+Route::get('/admin/pro/net', 'ProController@ViewNet')->name('pro.net');
 
 // Route::get('/logout', 'AdminController@Logout')->name('logouts');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

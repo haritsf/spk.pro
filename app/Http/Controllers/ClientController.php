@@ -13,14 +13,18 @@ class ClientController extends Controller
 {
     public function Landing()
     {
-        return view('landing');
+        $countalternatifs = Kustom::CountAlternatifs();
+        $countkriterias = Kustom::CountKriterias();
+        return view('landing', ['countalternatifs' => $countalternatifs], ['countkriterias' => $countkriterias]);
     }
 
     public function Data()
     {
         $getalternatifs = Alternatif::get();
         $getkriterias = Kriteria::get();
-        // dd($getevals);
+        $getevals = Evaluasi::get();
+        $getall = compact("getalternatifs", "getkriterias", "getevals");
+        // dd($getall);
         return view(
             '/pages/client/data',
             ['getalternatifs' => $getalternatifs],

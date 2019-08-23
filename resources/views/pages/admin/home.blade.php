@@ -1,8 +1,8 @@
 @php
-  DEFINE('DBUSER', 'phpmyadmin');
-  DEFINE('DBPW', 'admin123');
+  DEFINE('DBUSER', 'root');
+  DEFINE('DBPW', '');
   DEFINE('DBHOST', 'localhost');
-  DEFINE('DBNAME', 'spk-promethee');
+  DEFINE('DBNAME', 'promethee');
   
   $koneksi = new mysqli(DBHOST, DBUSER, DBPW, DBNAME);
   if ($koneksi) {

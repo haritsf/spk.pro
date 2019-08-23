@@ -6,12 +6,12 @@
   @section('title','kriteria')
   <div class="card shadow rounded">
     <div class="card-body">
-      <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#collapseTambah"
-        aria-expanded="false" aria-controls="collapseTambah">
-        Tambah
+      <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#EditBobot"
+        aria-expanded="false" aria-controls="EditBobot">
+        Atur Bobot
       </button>
-      <div class="collapse" id="collapseTambah">
-        <form action="{{url('/simpankecamatan')}}" method="post">
+      <div class="collapse" id="EditBobot">
+        <form action="#" method="post">
           @csrf
           <br>
           <div class="row">
@@ -22,36 +22,29 @@
               </div>
               <div class="form-group">
                 <h5 class="label-control">Parameter</h5>
-                <select class="form-control selectric" name="min_max" required="">
-                  <option value="min">min</option>
-                  <option value="max">max</option>
+                <select class="form-control select2" style="width: 50%" name="minmaks" required>
+                  <option value="min">Min</option>
+                  <option value="maks">Maks</option>
                 </select>
               </div>
               <div class="form-group">
                 <h5 class="label-control">Tipe</h5>
-                <select class="form-control" name="pref" required="">
-                  <option value="1">Usual</option>
-                  <option value="2">Linear</option>
-                  <option value="3">Quasi</option>
-                  <option value="4">Linear Quasi</option>
-                  <option value="5">Level</option>
-                  <option value="6">Gaussian</option>
+                <select class="form-control select2" style="width: 100%" name="pref" required>
+                  @foreach ($prefs as $pref)
+                  <option value="{{$pref->id}}">{{$pref->nama}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
 
             <div class="col col-md-6">
               <div class="form-group">
-                <h5 class="label-control">P</h5>
-                <input class="form-control" type="text" name="code">
+                <h5 class="label-control">q</h5>
+                <input class="form-control" type="number" name="q">
               </div>
               <div class="form-group">
-                <h5 class="label-control">Q</h5>
-                <input class="form-control" type="text" name="nama">
-              </div>
-              <div class="form-group">
-                <h5 class="label-control">S</h5>
-                <input class="form-control" type="text" name="code">
+                <h5 class="label-control">p</h5>
+                <input class="form-control" type="number" name="p">
               </div>
               <button class="btn btn-success btn-md" type="submit">Proses</button>
             </div>
@@ -94,7 +87,6 @@
                 <td>{{ $data->bobot*100 }}%</td>
                 <td>
                   <a class="btn btn-warning btn-md" href="{{route('kriteria.edit',$data->id)}}">Edit</a>
-                  <a class="btn btn-danger btn-md disabled" href="">Delete</a>
                 </td>
               </tr>
               @endforeach

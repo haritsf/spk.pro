@@ -9,6 +9,7 @@ use App\Kriteria;
 use App\Alternatif;
 use App\Evaluasi;
 use App\Pengguna;
+use App\Preferensi;
 use App\User;
 use Session;
 use Hash;
@@ -50,8 +51,10 @@ class AdminController extends Controller
 
     public function KriteriaRead()
     {
-        $kriterias = Kriteria::all();
-        return view('pages/data/kriteria', ['kriterias' => $kriterias]);
+        // $kriterias = Kriteria::all();
+        $kriterias = DB::table('kriterias')->select('kriterias.id', 'kriterias.nama', 'kriterias.minmaks', 'prefs.nama as pref', 'kriterias.q', 'kriterias.p', 'kriterias.bobot')->join('prefs', 'prefs.id', '=', 'kriterias.pref')->get();
+        $prefs = Preferensi::all();
+        return view('pages/data/kriteria', ['kriterias' => $kriterias], ['prefs' => $prefs]);
     }
 
     public function Preferensi()
@@ -152,8 +155,9 @@ class AdminController extends Controller
     public function KriteriaEdit($id)
     {
         $kriteria = Kriteria::find($id);
+        $prefs = Preferensi::all();
         // dd($kriteria);
-        return view('pages/data/kriteria/edit', ['kriteria' => $kriteria]);
+        return view('pages/data/kriteria/edit', ['kriteria' => $kriteria], ['prefs' => $prefs]);
     }
 
     public function KriteriaUpdate(Request $request)
@@ -176,9 +180,9 @@ class AdminController extends Controller
         $update = User::find($request->id);
         $update->username = $request->username;
         $update->alias = $request->alias;
-        $update->role = $request->role;
+        // $update->role = $request->role;
         $update->save();
-        return back()->with('success', 'Berhasil diupdate');
+        return back()->with('success', 'Profile berhasil diupdate');
 
     }
 }

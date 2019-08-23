@@ -65,20 +65,10 @@
         </ul>
       </form>
       <ul class="navbar-nav navbar-right">
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-            class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
-          <div class="dropdown-menu dropdown-list dropdown-menu-right shadow rounded">
-          </div>
-        </li>
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-            class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-          <div class="dropdown-menu dropdown-list dropdown-menu-right shadow rounded">
-          </div>
-        </li>
-        <li class="dropdown"><a href="#" data-toggle="dropdown"
+        <li class="dropdown beep"><a href="#" data-toggle="dropdown"
             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="{{url('img/avatar/avatar-1.png')}}" class="rounded-circle mr-2">
-            <div class="d-sm-none d-lg-inline-block">Hi, {{Auth::user()->username}}</div>
+            <div class="d-sm-none d-lg-inline-block">Hallo, {{Auth::user()->alias}}</div>
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow rounded">
             <div class="dropdown-title">Logged in 4 years ago</div>
@@ -146,16 +136,16 @@
                 <a href="{{route('pro.deviasi')}}" class="nav-link">Deviasi</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Indeks Preferensi</a>
+                <a href="{{route('pro.preferensi')}}" class="nav-link">Indeks Preferensi</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Leaving Flow</a>
+                <a href="{{route('pro.leaving')}}" class="nav-link">Leaving Flow</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Entering Flow</a>
+                <a href="{{route('pro.entering')}}" class="nav-link">Entering Flow</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Net Flow</a>
+                <a href="{{route('pro.net')}}" class="nav-link">Net Flow</a>
               </li>
             </ul>
           </li>

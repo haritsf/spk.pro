@@ -33,7 +33,7 @@
   @section('title','kecamatan')
   <div class="card shadow rounded">
     <div class="card-body">
-      <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseTambah"
+      <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#collapseTambah"
         aria-expanded="false" aria-controls="collapseTambah">
         Tambah
       </button>
