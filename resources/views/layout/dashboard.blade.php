@@ -124,8 +124,8 @@
               @endforeach
             </ul>
           </li>
-          <li class="nav-item"><a href="{{route('analisa.read')}}" class="nav-link"><i
-                class="fas fa-external-link-alt"></i><span>Analisa</span></a>
+          <li class="nav-item"><a href="{{route('klasifikasi.read')}}" class="nav-link"><i
+                class="fas fa-external-link-alt"></i><span>Klasifikasi</span></a>
           </li>
           <li class="menu-header">Step by Step</li>
           <li class="nav-item dropdown">

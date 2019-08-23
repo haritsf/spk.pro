@@ -149,29 +149,6 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
   @section('pages','admin')
   @section('title','analisa')
 
-  {{-- <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="form-group">
-            <h5 class="label-control">Pilih Kecamatan</h5>
-            <select class="form-control select2" name="id_alternatif" required="" multiple="">
-              <option value="1">Bodeh</option>
-              <option value="2">Ulujami</option>
-              <option value="3">Comal</option>
-              <option value="4">Ampelgading</option>
-              <option value="5">Petarukan</option>
-              <option value="6">Taman</option>
-            </select>
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-success btn-md" type="submit" id="swal-2">Mulai!</button>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-
   <div class="row">
     <div class="col-lg-12">
       <div class="card shadow rounded">

@@ -23,7 +23,7 @@ Route::get('/pemalang', 'ClientController@Pemalang')->name('client.pemalang');
 Route::get('/admin/dashboard', 'AdminController@Dashboard')->name('admin.dashboard');
 Route::get('/admin/home', 'AdminController@Home')->name('admin.home');
 Route::get('/admin/pemalang', 'AdminController@Pemalang')->name('pemalang.read');
-Route::get('/admin/analisa', 'AdminController@Analisa')->name('analisa.read');
+Route::get('/admin/klasifikasi', 'AdminController@Klasifikasi')->name('klasifikasi.read');
 Route::get('/admin/user', 'AdminController@Pengguna')->name('pengguna.read');
 Route::post('/admin/user/post', 'AdminController@CreatePengguna')->name('pengguna.create');
 Route::get('/admin/user/{id}', 'AdminController@EditPengguna')->name('pengguna.edit');

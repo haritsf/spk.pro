@@ -70,6 +70,13 @@ class AdminController extends Controller
         return view('pages/admin/analisa');
     }
 
+    public function Klasifikasi()
+    {
+        $klasifikasi = DB::table('klasifikasis')->select('klasifikasis.id', 'kriterias.nama', 'klasifikasis.nilai', 'klasifikasis.klasifikasi')->join('kriterias', 'klasifikasis.kriteria', '=', 'kriterias.id')->get();
+        // dd($klasifikasi);
+        return view('pages/data/klasifikasi', ['klasifikasi' => $klasifikasi]);
+    }
+
     public function Pengguna()
     {
         $datas = User::get();
