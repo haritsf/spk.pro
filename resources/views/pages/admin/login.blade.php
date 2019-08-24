@@ -63,22 +63,7 @@
                                     </button>
                                 </div>
                             </form>
-                            {{-- <div class="row sm-gutters">
-                                <div class="col-6">
-                                    <a class="btn btn-block btn-social btn-facebook">
-                                        <span class="fab fa-facebook"></span> Facebook
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a class="btn btn-block btn-social btn-google">
-                                        <span class="fab fa-google"></span> Google
-                                    </a>
-                                </div>
-                            </div> --}}
                         </div>
-                        {{-- <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
-                        </div> --}}
                     </div>
                 </div>
                 <div class="col-8" style="background:url('../img/unsplash/ground.jpg')">

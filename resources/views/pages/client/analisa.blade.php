@@ -1,4 +1,4 @@
-<?php
+@php
   DEFINE('DBUSER', 'root');
   DEFINE('DBPW', '');
   DEFINE('DBHOST', 'localhost');
@@ -140,7 +140,7 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
     $arrayIndex[$x][$y] = $totalIndex;
   }
 }
-?>
+@endphp
 
 @extends('layout.client')
 
@@ -259,11 +259,11 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
         </div>
         <div class="card-body">
             <?php
-                                      for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
-                                        $netflow[$a] = ($bufferLeaving[$a] - $bufferEntering[$a]);
-                                      }
-                                      arsort($netflow);
-                                      $n = 1; ?>
+            for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
+              $netflow[$a] = ($bufferLeaving[$a] - $bufferEntering[$a]);
+            }
+            asort($netflow);
+            $n = 1; ?>
             <table width="100%" class="table table-striped table-bordered table-hover table-md" id="totalPref">
               <thead>
                 <tr>
@@ -280,13 +280,12 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
               </thead>
               <tbody>
                 <?php
-                                        foreach ($netflow as $x => $net) { ?>
+                foreach ($netflow as $x => $net) { ?>
                 <tr align="center">
                   <td><?php echo $n; ?></td>
                   <td><?php echo $datas[$x]['alternatif']; ?></td>
                   <td><?php echo number_format($net, 2); ?></td>
-                  <?php $n++;
-                                          } ?>
+                  <?php $n++;  } ?>
                 </tr>
               </tbody>
             </table>

@@ -250,7 +250,7 @@ for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
                             for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
                                 $netflow[$a] = ($bufferLeaving[$a] - $bufferEntering[$a]);
                             }
-                            arsort($netflow);
+                            asort($netflow);
                             $n = 1;
                             foreach ($netflow as $x => $net) { ?>
                             <tr align="center">

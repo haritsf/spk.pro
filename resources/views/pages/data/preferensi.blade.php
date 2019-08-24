@@ -17,7 +17,8 @@
   @section('pages','data')
   @section('title','preferensi')
   <div class="row">
-    <div class="col-12">
+    <div class="col"></div>
+    <div class="col-md-6">
       <div class="card shadow rounded">
         <div class="card-body">
           <table width="100%" class="table table-striped table-bordered table-hover" id="tablePreferensi">
@@ -39,7 +40,12 @@
           </table>
         </div>
       </div>
+    </div>
+    <div class="col"></div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-12">
       <div class="card">
         <h3 id="bag0_0">Tipe - Tipe Kriteria Dasar Fungsi Preferensi</h3>
         <p align="justify">Untuk setiap kriteria, fungsi preferensi menerjemahkan perbedaan antara dua alternatif
@@ -214,4 +220,7 @@
             </div>
       </div>
     </div>
-    @endsection
+  </div>
+
+</div>
+@endsection

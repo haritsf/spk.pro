@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <h5 class="label-control">Password</h5>
-                <input class="form-control" type="text" name="password" placeholder="Password..." required>
+                <input class="form-control" type="password" name="password" placeholder="Password..." required>
               </div>
                 <div class="form-group mr-3">
                     <h5 class="label-control">Role</h5>

@@ -8,6 +8,7 @@ use App\Helpers\Kustom;
 use App\Kriteria;
 use App\Alternatif;
 use App\Evaluasi;
+use App\Klasifikasi;
 use App\Pengguna;
 use App\Preferensi;
 use App\User;
@@ -72,6 +73,7 @@ class AdminController extends Controller
 
     public function Klasifikasi()
     {
+        // $klasifikasi = Klasifikasi::all();
         $klasifikasi = DB::table('klasifikasis')->select('klasifikasis.id', 'kriterias.nama', 'klasifikasis.nilai', 'klasifikasis.klasifikasi')->join('kriterias', 'klasifikasis.kriteria', '=', 'kriterias.id')->get();
         // dd($klasifikasi);
         return view('pages/data/klasifikasi', ['klasifikasi' => $klasifikasi]);

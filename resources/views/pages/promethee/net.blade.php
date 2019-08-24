@@ -208,7 +208,7 @@ for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
                   for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
                   $netflow[$a] = ($bufferLeaving[$a] - $bufferEntering[$a]);
                   }
-                  arsort($netflow);
+                  asort($netflow);
                   $n = 1; ?>
                     <table width="100%" class="table table-striped table-bordered table-hover table-md" id="totalPref">
                         <thead>
