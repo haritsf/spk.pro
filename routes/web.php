@@ -50,7 +50,7 @@ Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@KecamatanDelete
 
 // PROMETHEE
 Route::get('/admin/pro/deviasi', 'ProController@ViewDeviasi')->name('pro.deviasi');
-Route::get('/admin/pro/indekspref', 'ProController@ViewPreferensi')->name('pro.preferensi');
+Route::get('/admin/pro/indekspref', 'ProController@Preferensi')->name('pro.preferensi');
 Route::get('/admin/pro/leaving', 'ProController@ViewLeaving')->name('pro.leaving');
 Route::get('/admin/pro/entering', 'ProController@ViewEntering')->name('pro.entering');
 Route::get('/admin/pro/net', 'ProController@ViewNet')->name('pro.net');

@@ -36,93 +36,106 @@ class ProController extends Controller
 
     public function ViewPreferensi()
     {
-        $showpreferensi = $this->Preferensi();
+        $showpreferensi = $this->Deviasi();
+        // dd($showpreferensi);
         return view('pages/promethee/indekspref', ['showpreferensi' => $showpreferensi]);
     }
 
     public function Preferensi()
     {
-        $countalt = Kustom::CountAlternatifs();
-        $countkri = Kustom::CountKriterias();
-        $totaleval = $countalt * $countalt * $countkri;
-
-        $d = $this->Deviasi();
+        $d[] = $this->Deviasi();
+        $preferensi = array();
         // dd($d);
-
-        $kriterias = DB::table('kriterias')->select('kriterias.id', 'kriterias.nama', 'kriterias.minmaks', 'prefs.nama as preferensi', 'kriterias.q', 'kriterias.p', 'kriterias.bobot')->join('prefs', 'prefs.id', '=', 'kriterias.pref')->get();
-        foreach ($kriterias as $kriteria) {
-            $id_kriteria[] = $kriteria->id;
-            $nama[] = $kriteria->nama;
-            $minmaks[] = $kriteria->minmaks;
-            $pref[] = $kriteria->preferensi;
-            $q[] = $kriteria->q;
-            $p[] = $kriteria->p;
-            $bobot[] = $kriteria->bobot;
-        }
-        // dd($kriterias);
-        for ($no = 0; $no < $totaleval; $no++) {
-            for ($nokriteria = 0; $nokriteria < $countkri; $nokriteria++) {
-                switch ($pref[$nokriteria]) {
-                    case 'Usual':
-                        // 1. Usual
-                        if ($d[$no] == 0) {
-                            $preferensi[$no] = [0, 'Usual'];
-                        } else {
-                            $preferensi[$no] = [1, 'Usual'];
-                        }
-                        break;
-
-                    case 'Quasi':
-                        // 2. Quasi
-                        if (-$q[$nokriteria] <= $d[$no] and $d[$no] <= $q[$nokriteria]) {
-                            $preferensi[$no] = [0, 'Quasi'];
-                        } elseif ($d[$no] < -$q[$nokriteria] or $d[$no] > $q[$nokriteria]) {
-                            $preferensi[$no] = [1, 'Quasi'];
-                        }
-                        break;
-
-                    case 'Linier':
-                        // 3. Linier
-                        if (-$p[$nokriteria] <= $d[$no] and $d[$no] <= $p[$nokriteria]) {
-                            $preferensi[$no] = [($d[$no] / $p[$nokriteria]), 'Linier'];
-                        } elseif ($d[$no] < -$p[$nokriteria] or $d[$no] > $p[$nokriteria]) {
-                            $preferensi[$no] = [1, 'Linier'];
-                        }
-                        break;
-
-                    case 'Level':
-                        // 4. Level
-                        if ($d[$no] <= $q[$nokriteria]) {
-                            $preferensi[$no] = [0, 'LQ'];
-                        } elseif ($q[$nokriteria] < $d[$no] and $d[$no] <= $p[$nokriteria]) {
-                            $preferensi[$no] = [0.5, 'LQ'];
-                        } elseif ($p[$nokriteria] < $d[$no]) {
-                            $preferensi[$no] = [1, 'LQ'];
-                        }
-                        break;
-
-                    case 'Area':
-                        // 5. Area
-                        if (abs($d[$no]) <= $q[$nokriteria]) {
-                            $preferensi[$no] = [0, 'Area'];
-                        } elseif ($q[$nokriteria] < abs($d[$no]) and abs($d[$no]) <= $p[$nokriteria]) {
-                            $preferensi[$no] = [(abs($d[$no]) - $q[$nokriteria]) / ($p[$nokriteria] - $q[$nokriteria]), 'Area'];
-                        } elseif ($p[$nokriteria] < abs($d[$no])) {
-                            $preferensi[$no] = [1, 'Area'];
-                        }
-                        break;
-
-                    case 'Gaussian':
-                        // 6. Gaussian
-                        echo 'Preferensi Gaussian<br>';
-                        break;
+        foreach ($d as $d) {
+            for ($no = 0; $no < count($d); $no++) {
+                if ($d[$no]['kriteria'] == "Usual") {
+                    if ($d[$no]['nilai'] == 0) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 0
+                        ];
+                    } else {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 1
+                        ];
+                    }
+                } elseif ($d[$no]['kriteria'] == "Quasi") {
+                    if (-$d[$no]['q'] <= $d[$no]['deviasi'] and $d[$no]['deviasi'] <= $d[$no]['q']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 0
+                        ];
+                    } elseif ($d[$no]['deviasi'] < -$d[$no]['q'] or $d[$no]['deviasi'] > $d[$no]['q']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 1
+                        ];
+                    }
+                } elseif ($d[$no]['kriteria'] == "Linier") {
+                    if (-$d[$no]['p'] <= $d[$no]['deviasi'] and $d[$no]['deviasi'] <= $d[$no]['p']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => ($d[$no]['deviasi'] / $d[$no]['p'])
+                        ];
+                    } elseif ($d[$no]['deviasi'] < -$d[$no]['p'] or $d[$no]['deviasi'] > $d[$no]['p']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 1
+                        ];
+                    }
+                } elseif ($d[$no]['kriteria'] == "Level") {
+                    if ($d[$no]['deviasi'] <= $d[$no]['q']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 0
+                        ];
+                    } elseif ($d[$no]['q'] < $d[$no]['deviasi'] and $d[$no]['deviasi'] <= $d[$no]['p']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 0.5
+                        ];
+                    } elseif ($d[$no]['p'] < $d[$no]['deviasi']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 1
+                        ];
+                    }
+                } elseif ($d[$no]['kriteria'] == "Area") {
+                    if (abs($d[$no]['deviasi']) <= $d[$no]['q']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 0
+                        ];
+                    } elseif ($d[$no]['q'] < abs($d[$no]['deviasi']) and abs($d[$no]['deviasi']) <= $d[$no]['p']) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => (abs($d[$no]['deviasi']) - $d[$no]['q']) / ($d[$no]['p'] - $d[$no]['q'])
+                        ];
+                    } elseif ($d[$no]['p'] < abs($d[$no]['deviasi'])) {
+                        $preferensi[$no] = [
+                            "kriteria" => $d[$no]['kriteria'],
+                            "tipe" => $d[$no]['tipe'],
+                            "nilai" => 1
+                        ];
+                    }
+                } elseif ($d[$no]['kriteria'] == "Gaussian") {
+                    echo $no . "Ini Gaussian <br>";
                 }
             }
         }
-
-        $output = compact("kriteria", "preferensi");
-        // dd($preferensi);
-        return $preferensi;
+        print_r($preferensi);
     }
 
     public function ViewDeviasi()
@@ -146,7 +159,16 @@ class ProController extends Controller
         foreach ($datas as $data => $value) {
             for ($x = 0; $x < Kustom::CountAlternatifs(); $x++) {
                 for ($y = 0; $y < Kustom::CountAlternatifs(); $y++) {
-                    $nilaideviasi[] = ($value[$x]->nilai) - ($value[$y]->nilai);
+                    $nilaideviasi[] = [
+                        "alternatifx" => $value[$x]->alternatif,
+                        "alternatify" => $value[$y]->alternatif,
+                        "kriteria" => $value[$x]->kriteria,
+                        "tipe" => $value[$x]->tipe,
+                        "q" => $value[$x]->q,
+                        "p" => $value[$x]->p,
+                        "bobot" => $value[$x]->bobot,
+                        "deviasi" => ($value[$x]->nilai) - ($value[$y]->nilai)
+                    ];
                 }
             }
         }
@@ -157,7 +179,7 @@ class ProController extends Controller
 
     public function JoinEvaluasi($id)
     {
-        $joins = DB::table('evals')->select('evals.id as id', 'alternatifs.nama as alternatif', 'kriterias.nama as kriteria', 'kriterias.bobot', 'evals.nilai as nilai')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->where('kriterias.id', '=', $id)->get();
+        $joins = DB::table('evals')->select('evals.id as id', 'alternatifs.nama as alternatif', 'kriterias.nama as kriteria', 'kriterias.q as q', 'kriterias.p as p', 'prefs.nama as tipe', 'kriterias.bobot', 'evals.nilai as nilai')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->join('prefs', 'kriterias.pref', '=', 'prefs.id')->where('kriterias.id', '=', $id)->get();
         return $joins;
     }
 }

@@ -1,6 +1,6 @@
-{{-- @php
-dd($showpreferensi);
-@endphp --}}
+@php
+// dd($showpreferensi);
+@endphp
 
 @extends('layout.dashboard')
 
@@ -16,14 +16,32 @@ dd($showpreferensi);
                         <thead>
                             <tr align="center">
                                 <td>No.</td>
-                                <td>Nilai</td>
+                                <td>X</td>
+                                <td>Y</td>
                                 <td>Tipe</td>
+                                <td>q</td>
+                                <td>p</td>
+                                <td>Bobot</td>
+                                <td>Deviasi</td>
                             </tr>
                         </thead>
                         <tbody>
-                           {{-- @foreach ($showpreferensi as $show)
-                            <td>{{$show->[0]}}</td>
-                           @endforeach --}}
+                            @php
+                            $n = 0;
+                            @endphp
+                            @foreach ($showpreferensi as $show)
+                            <tr>
+                                <td>{{$n++}}</td>
+                                <td>{{$show->alternatifx}}</td>
+                                <td>{{$show->alternatify}}</td>
+                                <td>{{$show->kriteria}}</td>
+                                <td>{{$show->tipe}}</td>
+                                <td>{{$show->q}}</td>
+                                <td>{{$show->p}}</td>
+                                <td>{{$show->bobot}}</td>
+                                <td>{{$show->deviasi}}</td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

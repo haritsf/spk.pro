@@ -20,6 +20,8 @@ class ClientController extends Controller
 
     public function Data()
     {
+        $cobajoins = DB::table('evals')->select('alternatifs.nama', 'kriterias.nama', 'klasifikasis.klasifikasi')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.klasifikasi')->join('alternatifs', 'evals.alternatif', '=', 'alternatifs.id')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->get();
+        // dd($cobajoins);
         $getalternatifs = Alternatif::get();
         $getkriterias = Kriteria::get();
         $getevals = Evaluasi::get();

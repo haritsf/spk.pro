@@ -37,16 +37,22 @@ function CountAlternatifs($koneksi)
 
 function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
 {
-  $query = mysqli_query($koneksi, "SELECT * FROM kriterias");
+  // $query = mysqli_query($koneksi, "SELECT * FROM kriterias");
+  // while ($row  = mysqli_fetch_array($query)) {
+  //   $id_pref[] = $row['pref'];
+  //   $q[] = $row['q'];
+  //   $p[] = $row['p'];
+  // }
+  $query = mysqli_query($koneksi, "SELECT p.nama AS pref, k.q AS q, k.p AS p FROM kriterias k JOIN prefs p ON p.id = k.pref");
   while ($row  = mysqli_fetch_array($query)) {
-    $id_pref[] = $row['pref'];
+    $pref[] = $row['pref'];
     $q[] = $row['q'];
     $p[] = $row['p'];
   }
   $no = $no - 1;
 
-  switch ($id_pref[$no]) {
-    case '1':
+  switch ($pref[$no]) {
+    case 'Usual':
       // Usual
       if ($nilaiDeviasi == 0) {
         $preferensi = 0;
@@ -54,7 +60,7 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
         $preferensi = 1;
       }
       break;
-    case '2':
+    case 'Quasi':
       // Kuasi
       if (-$q[$no] <= $nilaiDeviasi and $nilaiDeviasi <= $q[$no]) {
         $preferensi = 0;
@@ -62,7 +68,7 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
         $preferensi = 1;
       }
       break;
-    case '3':
+    case 'Linier':
       // Linier
       if (-$p[$no] <= $nilaiDeviasi and $nilaiDeviasi <= $p[$no]) {
         $preferensi = ($nilaiDeviasi / $p[$no]);
@@ -70,7 +76,7 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
         $preferensi = 1;
       }
       break;
-    case '4':
+    case 'Level':
       // Level
       if ($nilaiAbsolut <= $q[$no]) {
         $preferensi = 0;
@@ -80,7 +86,7 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
         $preferensi = 1;
       }
       break;
-    case '5':
+    case 'Area':
       // Area
       if ($nilaiAbsolut <= $q[$no]) {
         $preferensi = 0;
@@ -90,7 +96,7 @@ function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
         $preferensi = 1;
       }
       break;
-    case '6':
+    case 'Gaussian':
       // Gaussian
       echo 'Preferensi Gaussian<br>';
       break;
@@ -131,8 +137,8 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
       while ($row = mysqli_fetch_array($query)) {
         $datas[] = $row;
       }
-      $nilaiAbsolut = Absolut($datas, $x, $y);
       $nilaiDeviasi = Deviasi($datas, $x, $y);
+      $nilaiAbsolut = Absolut($datas, $x, $y);
       $preferensi = Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut);
       $indexPref = IndeksPreferensi($koneksi, $no, $preferensi, $id_pref, $nilaiDeviasi, $nilaiAbsolut);
       $totalIndex = $totalIndex + $indexPref;
