@@ -146,6 +146,8 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
     $arrayIndex[$x][$y] = $totalIndex;
   }
 }
+// dd($preferensi);
+// die();
 @endphp
 
 @extends('layout.client')

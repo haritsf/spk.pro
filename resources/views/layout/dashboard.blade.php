@@ -39,7 +39,7 @@
   {{-- <script src="{{url('js/lodash.js')}}"></script> --}}
   <script>
     $(document).ready(function() {
-      $('#DataTables').DataTable({
+      $('#DataTables, #Tables').DataTable({
         'paging'      : true,
         'lengthChange': true,
         'searching'   : true,

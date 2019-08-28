@@ -24,24 +24,22 @@
                         <tbody>
                             @php $no = 0; @endphp
                             @foreach ($showdeviasi as $deviasi => $value)
-                            @for ($x = 0; $x < Kustom::CountAlternatifs(); $x++)
-                            @for ($y=0; $y < Kustom::CountAlternatifs(); $y++)
-                            @php
-                                $d = ($value[$x]->nilai)-($value[$y]->nilai);
-                            @endphp
-                            <tr align="center">
-                                <td>{{$no++}}</td>
-                                <td>{{$value[$x]->alternatif}}</td>
-                                <td>{{$value[$y]->alternatif}}</td>
-                                <td>{{$value[$x]->nilai}}</td>
-                                <td>{{$value[$y]->nilai}}</td>
-                                <td>{{$value[$y]->kriteria}}</td>
-                                <td>{{$d}}</td>
-                                <td>{{abs($d)}}</td>
-                            </tr>
-                            @endfor
-                            @endfor
-                            @endforeach
+                            @for ($x = 0; $x < Kustom::CountAlternatifs(); $x++) @for ($y=0; $y <
+                                Kustom::CountAlternatifs(); $y++) @php $d=($value[$x]->nilai)-($value[$y]->nilai);
+                                @endphp
+                                <tr align="center">
+                                    <td>{{$no++}}</td>
+                                    <td>{{$value[$x]->alternatif}}</td>
+                                    <td>{{$value[$y]->alternatif}}</td>
+                                    <td>{{$value[$x]->nilai}}</td>
+                                    <td>{{$value[$y]->nilai}}</td>
+                                    <td>{{$value[$y]->kriteria}}</td>
+                                    <td>{{$d}}</td>
+                                    <td>{{abs($d)}}</td>
+                                </tr>
+                                @endfor
+                                @endfor
+                                @endforeach
                         </tbody>
                     </table>
                 </div>

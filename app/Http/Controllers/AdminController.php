@@ -55,6 +55,7 @@ class AdminController extends Controller
         // $kriterias = Kriteria::all();
         $kriterias = DB::table('kriterias')->select('kriterias.id', 'kriterias.nama', 'kriterias.minmaks', 'prefs.nama as pref', 'kriterias.q', 'kriterias.p', 'kriterias.bobot')->join('prefs', 'prefs.id', '=', 'kriterias.pref')->get();
         $prefs = Preferensi::all();
+        // dd($kriterias);
         return view('pages/data/kriteria', ['kriterias' => $kriterias], ['prefs' => $prefs]);
     }
 

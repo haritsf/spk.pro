@@ -11,44 +11,26 @@
         Atur Bobot
       </button>
       <div class="collapse" id="EditBobot">
-        <form action="#" method="post">
+        <form action="" method="POST">
           @csrf
           <br>
           <div class="row">
-            <div class="col col-md-6">
+            @foreach ($kriterias as $kriteria)
+            <div class="col col-md-4">
               <div class="form-group">
-                <h5 class="label-control">Nama Kriteria</h5>
-                <input class="form-control" type="text" name="nama">
-              </div>
-              <div class="form-group">
-                <h5 class="label-control">Parameter</h5>
-                <select class="form-control select2" style="width: 50%" name="minmaks" required>
-                  <option value="min">Min</option>
-                  <option value="maks">Maks</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <h5 class="label-control">Tipe</h5>
-                <select class="form-control select2" style="width: 100%" name="pref" required>
-                  @foreach ($prefs as $pref)
-                  <option value="{{$pref->id}}">{{$pref->nama}}</option>
-                  @endforeach
-                </select>
+                <h6 class="label-control">{{$kriteria->nama}}</h6>
+                <div class="input-group">
+                  <input class="form-control" value="{{$kriteria->bobot*100}}" type="number" name="{{$kriteria->id}}"
+                    step="1">
+                  <div class="input-group-append">
+                    <div class="input-group-text">%</div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="col col-md-6">
-              <div class="form-group">
-                <h5 class="label-control">q</h5>
-                <input class="form-control" type="number" name="q">
-              </div>
-              <div class="form-group">
-                <h5 class="label-control">p</h5>
-                <input class="form-control" type="number" name="p">
-              </div>
-              <button class="btn btn-success btn-md" type="submit">Proses</button>
-            </div>
+            @endforeach
           </div>
+          <button class="btn btn-success btn-md" type="submit">Proses</button>
         </form>
       </div>
     </div>
