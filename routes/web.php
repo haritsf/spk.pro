@@ -16,7 +16,7 @@
 // CLIENT
 Route::get('/', 'ClientController@Landing')->name('landing');
 Route::get('/data', 'ClientController@Data')->name('client.data');
-Route::get('/analisa', 'ClientController@Analisa')->name('client.analisa');
+Route::get('/analisa', 'ProController@Analisa')->name('client.analisa');
 Route::get('/pemalang', 'ClientController@Pemalang')->name('client.pemalang');
 
 // ADMIN
@@ -51,8 +51,7 @@ Route::get('/admin/data/kecamatan/delete/{id}', 'AdminController@KecamatanDelete
 // PROMETHEE
 Route::get('/admin/pro/deviasi', 'ProController@ViewDeviasi')->name('pro.deviasi');
 Route::get('/admin/pro/indekspref', 'ProController@ViewPreferensi')->name('pro.preferensi');
-Route::get('/admin/pro/leaving', 'ProController@Leaving')->name('pro.leaving');
-Route::get('/admin/pro/entering', 'ProController@ViewEntering')->name('pro.entering');
+Route::get('/admin/pro/leflow', 'ProController@ViewLeavingEntering')->name('pro.leavingentering');
 Route::get('/admin/pro/net', 'ProController@ViewNet')->name('pro.net');
 
 // Route::get('/logout', 'AdminController@Logout')->name('logouts');

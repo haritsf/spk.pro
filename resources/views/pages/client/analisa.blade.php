@@ -1,155 +1,4 @@
-@php
-  DEFINE('DBUSER', 'root');
-  DEFINE('DBPW', '');
-  DEFINE('DBHOST', 'localhost');
-  DEFINE('DBNAME', 'promethee');
-  
-  $koneksi = new mysqli(DBHOST, DBUSER, DBPW, DBNAME);
-  if ($koneksi) {
-  }
-  
-  $dbs = mysqli_select_db($koneksi, DBNAME);
-  if (!$dbs) {
-    die("Database Not Connected : " . mysqli_error($koneksi));
-    exit();
-  }
-  
-  if ($koneksi) {
-  } else {
-    echo "Gagal Koneksi";
-  }
-  
-  $id_pref = $bobot = $preferensi = null;
-
-function CountKriterias($koneksi)
-{
-  $query  = mysqli_query($koneksi, "SELECT * FROM kriterias");
-  $rows   = mysqli_num_rows($query);
-  return $rows;
-}
-
-function CountAlternatifs($koneksi)
-{
-  $query  = mysqli_query($koneksi, "SELECT * FROM alternatifs");
-  $rows   = mysqli_num_rows($query);
-  return $rows;
-}
-
-function Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
-{
-  // $query = mysqli_query($koneksi, "SELECT * FROM kriterias");
-  // while ($row  = mysqli_fetch_array($query)) {
-  //   $id_pref[] = $row['pref'];
-  //   $q[] = $row['q'];
-  //   $p[] = $row['p'];
-  // }
-  $query = mysqli_query($koneksi, "SELECT p.nama AS pref, k.q AS q, k.p AS p FROM kriterias k JOIN prefs p ON p.id = k.pref");
-  while ($row  = mysqli_fetch_array($query)) {
-    $pref[] = $row['pref'];
-    $q[] = $row['q'];
-    $p[] = $row['p'];
-  }
-  $no = $no - 1;
-
-  switch ($pref[$no]) {
-    case 'Usual':
-      // Usual
-      if ($nilaiDeviasi == 0) {
-        $preferensi = 0;
-      } else {
-        $preferensi = 1;
-      }
-      break;
-    case 'Quasi':
-      // Kuasi
-      if (-$q[$no] <= $nilaiDeviasi and $nilaiDeviasi <= $q[$no]) {
-        $preferensi = 0;
-      } elseif ($nilaiDeviasi < -$q[$no] or $nilaiDeviasi > $q[$no]) {
-        $preferensi = 1;
-      }
-      break;
-    case 'Linier':
-      // Linier
-      if (-$p[$no] <= $nilaiDeviasi and $nilaiDeviasi <= $p[$no]) {
-        $preferensi = ($nilaiDeviasi / $p[$no]);
-      } elseif ($nilaiDeviasi < -$p[$no] or $nilaiDeviasi > $p[$no]) {
-        $preferensi = 1;
-      }
-      break;
-    case 'Level':
-      // Level
-      if ($nilaiAbsolut <= $q[$no]) {
-        $preferensi = 0;
-      } elseif ($q[$no] < $nilaiAbsolut and $nilaiAbsolut <= $p[$no]) {
-        $preferensi = 0.5;
-      } elseif ($p[$no] < $nilaiAbsolut) {
-        $preferensi = 1;
-      }
-      break;
-    case 'Area':
-      // Area
-      if ($nilaiAbsolut <= $q[$no]) {
-        $preferensi = 0;
-      } elseif ($q[$no] < $nilaiAbsolut and $nilaiAbsolut <= $p[$no]) {
-        $preferensi = ($nilaiAbsolut - $q[$no]) / ($p[$no] - $q[$no]);
-      } elseif ($p[$no] < $nilaiAbsolut) {
-        $preferensi = 1;
-      }
-      break;
-    case 'Gaussian':
-      // Gaussian
-      echo 'Preferensi Gaussian<br>';
-      break;
-  }
-
-  return number_format($preferensi, 2);
-}
-
-function IndeksPreferensi($koneksi, $no, $preferensi, $id_pref, $nilaiDeviasi, $nilaiAbsolut)
-{
-  $query = mysqli_query($koneksi, "SELECT * FROM kriterias WHERE id = $no");
-  while ($row  = mysqli_fetch_array($query)) {
-    $bobot[] = $row['bobot'];
-  }
-  $preferensi = Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut);
-  $indexPref = floatval($bobot[0]) * $preferensi;
-  return number_format($indexPref, 2);
-}
-
-function Absolut($datas, $x, $y)
-{
-  $nilaiAbsolut = abs(Deviasi($datas, $x, $y));
-  return $nilaiAbsolut;
-}
-
-function Deviasi($datas, $x, $y)
-{
-  $nilaiDeviasi = $datas[$x]['nilai'] - $datas[$y]['nilai'];
-  return $nilaiDeviasi;
-}
-
-for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
-  for ($y = 1; $y <= CountAlternatifs($koneksi); $y++) {
-    $totalIndex = null;
-    for ($no = 1; $no <= CountKriterias($koneksi); $no++) {
-      $query = mysqli_query($koneksi, "SELECT e.id AS id, a.nama AS alternatif, k.nama AS kriteria, e.nilai AS nilai FROM evals e JOIN alternatifs a ON a.id = e.alternatif JOIN kriterias k ON e.kriteria = k.id WHERE k.id = $no");
-      $datas = array($query);
-      while ($row = mysqli_fetch_array($query)) {
-        $datas[] = $row;
-      }
-      $nilaiDeviasi = Deviasi($datas, $x, $y);
-      $nilaiAbsolut = Absolut($datas, $x, $y);
-      $preferensi = Preferensi($koneksi, $no, $id_pref, $nilaiDeviasi, $nilaiAbsolut);
-      $indexPref = IndeksPreferensi($koneksi, $no, $preferensi, $id_pref, $nilaiDeviasi, $nilaiAbsolut);
-      $totalIndex = $totalIndex + $indexPref;
-    }
-    $arrayIndex[$x][$y] = $totalIndex;
-  }
-}
-// dd($preferensi);
-// die();
-@endphp
-
+{{-- {{dd($tip)}} --}}
 @extends('layout.client')
 
 @section('content')
@@ -161,7 +10,8 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
         <h1>Analisa</h1>
         <p>Menampilkan Langkah - Langkah dalam pemrosesan Data menggunakan Metode PROMETHEE.</p>
         <div class="cta animated fadeInUp delay-1s" id="nav">
-          <a class="btn btn-warning btn-md btn-icon icon-right" href="#analisa">Lanjut <i class="fas fa-chevron-right"></i></a>
+          <a class="btn btn-warning btn-md btn-icon icon-right" href="#analisa">Lanjut <i
+              class="fas fa-chevron-right"></i></a>
         </div>
       </div>
       <div class="image d-none d-lg-block animated fadeIn delay-1s">
@@ -180,82 +30,30 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table heigth="100%" class="table table-striped table-bordered table-hover table-md" id="totalPref">
-              <thead align="center">
-                <tr>
-                  <th width="100">Alternatif</th>
-                  <?php
-                          for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) { ?>
-                  <th><?php echo $datas[$x]['alternatif']; ?></th>
-                  <?php } ?>
-                  <th style="color:#fafafa; background-color: #999999;">Jumlah</th>
-                  <th style="color:#fafafa; background-color: #666666;">Leaving</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                        $jumlah = 0;
-                        for ($a = 1; $a <= CountAlternatifs($koneksi); $a++) { ?>
-                <tr>
-                  <td align="left"><?php echo $datas[$a]['alternatif']; ?></td>
-                  <?php for ($b = 1; $b <= CountAlternatifs($koneksi); $b++) { ?>
-                  <td align="center">
-                    <?php
-                                if ($a == $b or $b == $a) {
-                                  echo '<b>' . number_format($arrayIndex[$a][$b], 2) . '</b>';
-                                } else {
-                                  echo number_format($arrayIndex[$a][$b], 2);
-                                }
-                                $jumlah = $jumlah + $arrayIndex[$a][$b];
-                                ?>
-                  </td>
-
-                  <?php } ?>
-                  <td align="center" style="color:#fafafa; background-color: #999999;">
-                    <?php echo number_format($jumlah, 2); ?>
-                  </td>
-                  <td align="center" style="color:#fafafa; background-color: #666666;">
-                    <?php
-                              $leaving = $jumlah / (CountAlternatifs($koneksi) - 1);
-                              echo number_format($leaving, 2);
-                              $bufferLeaving[$a] = $leaving;
-                              $jumlah = 0; ?>
-                  </td>
-                </tr>
-                <?php } ?>
-                <tr style="color:#fafafa; background-color: #999999;">
-                  <td>Jumlah</td>
-                  <?php
-                          for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
-                            for ($b = 1; $b < CountAlternatifs($koneksi); $b++) {
-                              $jumlah = $jumlah + $arrayIndex[$b][$a];
-                            } ?>
-                  <td align="center">
-                    <?php
-                              echo number_format($jumlah, 2);
-                              $jumlah = 0; ?>
-                  </td>
-                  <?php } ?>
-                </tr>
-                <tr style="color:#fafafa; background-color: #666666;">
-                  <td>Entering</td>
-                  <?php
-                          for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
-                            for ($b = 1; $b < CountAlternatifs($koneksi); $b++) {
-                              $jumlah = $jumlah + $arrayIndex[$b][$a];
-                            }
-                            $entering = $jumlah / (CountAlternatifs($koneksi) - 1); ?>
-                  <td align="center">
-                    <?php
-                              echo number_format($entering, 2);
-                              $bufferEntering[$a] = $entering;
-                              $jumlah = 0;
-                              ?>
-                  </td>
-                  <?php } ?>
-                </tr>
-              </tbody>
-            </table>
+            <table width="100%" class="table table-striped table-bordered table-hover table-md" id="LeavingEntering">
+              <thead>
+                <tr align="center">
+                  {{-- <td>Alternatif</td> --}}
+                      @for($a = 1; $a <= Kustom::CountAlternatifs(); $a++)
+                        <td>A{{$a}}</td>
+                      @endfor
+                    </tr>
+                  </thead>
+                  <tbody align="center">
+                    <tr>
+                      @for($y = 0; $y < Kustom::CountAlternatifs(); $y++)
+                        @for($x = 0; $x < Kustom::CountAlternatifs(); $x++)
+                          {{-- <td>A</td> --}}
+                          @if($x == $y)
+                            <td><b>{{number_format($tip[$y][$x]['value'], 2)}}</b></td>
+                          @else
+                            <td>{{number_format($tip[$y][$x]['value'], 2)}}</td>
+                          @endif
+                        @endfor
+                    </tr>
+                      @endfor
+                  </tbody>
+                </table>
           </div>
         </div>
       </div>
@@ -266,37 +64,29 @@ for ($x = 1; $x <= CountAlternatifs($koneksi); $x++) {
           <h2>Ranking</h2>
         </div>
         <div class="card-body">
-            <?php
-            for ($a = 1; $a < CountAlternatifs($koneksi); $a++) {
-              $netflow[$a] = ($bufferLeaving[$a] - $bufferEntering[$a]);
-            }
-            asort($netflow);
-            $n = 1; ?>
-            <table width="100%" class="table table-striped table-bordered table-hover table-md" id="totalPref">
-              <thead>
-                <tr>
-                  <th>
-                    <center>Ranking</center>
-                  </th>
-                  <th>
-                    <center>Kecamatan</center>
-                  </th>
-                  <th>
-                    <center>Netflow</center>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                foreach ($netflow as $x => $net) { ?>
-                <tr align="center">
-                  <td><?php echo $n; ?></td>
-                  <td><?php echo $datas[$x]['alternatif']; ?></td>
-                  <td><?php echo number_format($net, 2); ?></td>
-                  <?php $n++;  } ?>
-                </tr>
-              </tbody>
-            </table>
+          @php
+          asort($arraynet);
+          $no = 1;
+          @endphp
+          <table width="100%" class="table table-striped table-bordered table-hover table-md">
+            <thead align="center">
+              <tr>
+                <th>No.</th>
+                <th>Netflow</th>
+              </tr>
+            </thead>
+            <tbody align="center">
+              @foreach ($arraynet as $net => $value)
+              <tr>
+                <td>A{{$no}}</td>
+                <td>{{number_format($value, 2)}}</td>
+              </tr>
+              @php
+               $no++;   
+              @endphp
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

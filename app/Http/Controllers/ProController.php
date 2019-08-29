@@ -14,38 +14,107 @@ use App\User;
 
 class ProController extends Controller
 {
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+    
+    public function Analisa()
     {
-        $this->middleware('auth');
+        $arrayall = $this->LeavingEntering();
+        $arraynet = $this->Net();
+        return view(
+            'pages/client/analisa',
+            ['tip' => $arrayall[0]],
+            ['arraynet' => $arraynet]
+        );
     }
 
     public function ViewNet()
     {
-        return view('pages/promethee/net');
+        $arraynet = $this->Net();
+        // dd($arraynet);
+        return view('pages/promethee/net', ['arraynet' => $arraynet]);
     }
 
-    public function ViewEntering()
+    public function Net()
     {
-        return view('pages/promethee/entering');
+        $arrayall = $this->LeavingEntering();
+        $arraynet = array();
+        for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
+            $net = $arrayall[2][$n] - $arrayall[4][$n];
+            array_push($arraynet, $net);
+        }
+        // dd($arraynet);
+        return $arraynet;
     }
 
-    public function ViewLeaving()
+    public function ViewLeavingEntering()
     {
-        return view('pages/promethee/leaving');
+        $arrayall = $this->LeavingEntering();
+        // $pref = $this->Preferensi();
+        // dd($arrayall);
+        return view(
+            'pages/promethee/leavingentering',
+            ['tip' => $arrayall[0]],
+            ['tlf' => $arrayall[1]],
+            ['lf' => $arrayall[2]],
+            ['tle' => $arrayall[3]],
+            ['le' => $arrayall[4]]
+        );
     }
 
-    public function Leaving()
+    public function LeavingEntering()
     {
-        $ip[] = $this->Preferensi();
-        dd($ip);
-        $tip = null;
-        foreach ($ip as $ip) {
-            for ($loop = 0; $loop < 6; $loop++) {
-                $tip[$loop] = $tip[$loop + 13] + $ip[$loop]['ip'];
+        // define("MAX_COLS", Kustom::CountAlternatifs());
+
+        $pref = $this->Preferensi();
+        $pref = $pref[1];
+
+        $hasil = array(array());
+
+        $cols = 0;
+        $rows = 0;
+        for ($i = 0; $i < count($pref); $i++) {
+            array_push($hasil[$rows], $pref[$i]);
+
+            $cols += 1;
+            if ($cols == Kustom::CountAlternatifs()) {
+                if (!($i == count($pref) - 1)) {
+                    array_push($hasil, array());
+                }
+                $rows += 1;
+                $cols = 0;
             }
         }
-        // dd($ip[1]['ip']);
-        dd($tip);
+        // dd($hasil);
+
+        $arraytlf = $arrayleaving = $arraytef = $arrayentering = array();
+        for ($y = 0; $y < Kustom::CountAlternatifs(); $y++) {
+            $tlf = $tef = 0;
+            for ($x = 0; $x < Kustom::CountAlternatifs(); $x++) {
+                $tlf = $tlf + $hasil[$y][$x]['value'];
+                $tef = $tef + $hasil[$x][$y]['value'];
+            }
+            array_push($arraytlf, number_format($tlf, 2));
+            array_push($arraytef, number_format($tef, 2));
+            $leaving = $tlf / (Kustom::CountAlternatifs() - 1);
+            $entering = $tef / (Kustom::CountAlternatifs() - 1);
+            array_push($arrayleaving, number_format($leaving, 2));
+            array_push($arrayentering, number_format($entering, 2));
+        }
+        // dd($arraytef);
+        // dd($arrayentering);
+
+        $arrayall = $arraynet = array();
+        for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
+            $net = $arrayleaving[$n] - $arrayentering[$n];
+            array_push($arraynet, $net);
+        }
+        asort($arraynet);
+        array_push($arrayall, $hasil, $arraytlf, $arrayleaving, $arraytef, $arrayentering);
+        // dd($arrayall);
+        return $arrayall;
     }
 
     public function ViewPreferensi()
@@ -244,7 +313,6 @@ class ProController extends Controller
         $arrays = array();
         array_push($arrays, $preferensi, $hasil);
 
-        // dd($array_gabung);
         return $arrays;
     }
 

@@ -49,6 +49,18 @@
       });
     });
   </script>
+  <script>
+      $(document).ready(function() {
+        $('#LeavingEntering').DataTable({
+          'paging'      : false,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : false
+        });
+      });
+    </script>
 
 </head>
 
@@ -87,7 +99,7 @@
     <div class="main-sidebar sidebar-style-2 shadow">
       <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-          <a href="">promethee</a>
+          <a href="{{route('admin.dashboard')}}">promethee</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
           <a href="">pro</a>
@@ -139,10 +151,7 @@
                 <a href="{{route('pro.preferensi')}}" class="nav-link">Indeks Preferensi</a>
               </li>
               <li class="nav-item">
-                <a href="{{route('pro.leaving')}}" class="nav-link">Leaving Flow</a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('pro.entering')}}" class="nav-link">Entering Flow</a>
+                <a href="{{route('pro.leavingentering')}}" class="nav-link">Leaving & Entering Flow</a>
               </li>
               <li class="nav-item">
                 <a href="{{route('pro.net')}}" class="nav-link">Net Flow</a>

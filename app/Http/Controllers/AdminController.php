@@ -118,7 +118,6 @@ class AdminController extends Controller
         $data = User::find($request->id);
         $data->delete();
         return back()->with('success', 'User berhasil dihapus');
-
     }
 
     public function KecamatanCreate(Request $request)
@@ -178,7 +177,7 @@ class AdminController extends Controller
         $update->save();
         return back()->with('success', 'Nilai berhasil di Update');
     }
-    
+
     public function EditProfile($id)
     {
         $data = User::find($id);
@@ -193,6 +192,5 @@ class AdminController extends Controller
         // $update->role = $request->role;
         $update->save();
         return back()->with('success', 'Profile berhasil diupdate');
-
     }
 }

@@ -29,7 +29,7 @@
                     <div class="card-header">
                         <h2>Evaluasi</h2>
                     </div>
-                    <div class="card-body" id="Evals">
+                    <div class="card-body">
                         <div class="col-lg-12" id="evals">
                             <table width="100%" class="table table-striped table-bordered table-hover table-md">
                                 <thead>
@@ -42,13 +42,17 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                    for ($id=1; $id <= Kustom::CountAlternatifs() ; $id++) { echo '<tr align="center">'
-                                        ; echo '<td>' .'A'.$id.'</td>'; $getevals=Kustom::JoinanTabel($id); foreach
-                                        ($getevals as $evals) { echo '<td>' .$evals->klasifikasi.'</td>';
+                                    for ($id=1; $id <= Kustom::CountAlternatifs() ; $id++) { 
+                                        echo '<tr align="center">';
+                                        echo '<td>' .'A'.$id.'</td>';
+                                        $getevals = Kustom::JoinanTabel($id);
+                                        // dd($getevals);
+                                        foreach ($getevals as $evals) {
+                                            echo '<td>' .$evals->nilai.'</td>';
                                         }
                                         echo '</tr>';
                                         }
-                                        @endphp
+                                    @endphp
                                 </tbody>
                             </table>
                         </div>
@@ -68,7 +72,7 @@
                     <div class="card-body">
                         <table width="100%" class="table table-striped table-bordered table-hover table-md">
                             <thead>
-                                <tr align="center">
+                                <tr align="center" style="text-transform:lowercase">
                                     <th>ID</th>
                                     <th>NAMA</th>
                                     <th>PARAMETER</th>
