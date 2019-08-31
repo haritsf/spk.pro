@@ -23,4 +23,9 @@ class Evaluasi extends Model
     {
         return $this->hasOne('App\Kriteria', 'id');
     }
+
+    public function klasifikasis()
+    {
+        return $this->hasMany('App\Klasifikasi', 'nilai', 'nilai');
+    }
 }

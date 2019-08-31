@@ -14,20 +14,9 @@ use App\User;
 
 class ProController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-    
-    public function Analisa()
+    public function __construct()
     {
-        $arrayall = $this->LeavingEntering();
-        $arraynet = $this->Net();
-        return view(
-            'pages/client/analisa',
-            ['tip' => $arrayall[0]],
-            ['arraynet' => $arraynet]
-        );
+        $this->middleware('auth');
     }
 
     public function ViewNet()
@@ -40,10 +29,17 @@ class ProController extends Controller
     public function Net()
     {
         $arrayall = $this->LeavingEntering();
+        $namaalternatifs = Kustom::NamaAlternatifs();
         $arraynet = array();
+        $no = 1;
         for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
             $net = $arrayall[2][$n] - $arrayall[4][$n];
-            array_push($arraynet, $net);
+            $temp = [
+                'kecamatan' => $namaalternatifs[$n]['nama'],
+                'net' => $net
+            ];
+            $no++;
+            array_push($arraynet, $temp);
         }
         // dd($arraynet);
         return $arraynet;
@@ -107,11 +103,17 @@ class ProController extends Controller
         // dd($arrayentering);
 
         $arrayall = $arraynet = array();
+        $no = 1;
         for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
             $net = $arrayleaving[$n] - $arrayentering[$n];
-            array_push($arraynet, $net);
+            $temp = [
+                'kecamatan' => $no,
+                'net' => $net
+            ];
+            $no++;
+            array_push($arraynet, $temp);
         }
-        asort($arraynet);
+        // dd($arraynet);
         array_push($arrayall, $hasil, $arraytlf, $arrayleaving, $arraytef, $arrayentering);
         // dd($arrayall);
         return $arrayall;

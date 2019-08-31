@@ -20,7 +20,6 @@
             aria-expanded="false" aria-controls="collapseTambah">
             Tambah
           </button>
-          {{-- <button class="btn btn-primary" id="toastr-4">Launch</button> --}}
           <div class="collapse" id="collapseTambah">
             <form action="{{route('pengguna.create')}}" method="post" class="form">
               @csrf

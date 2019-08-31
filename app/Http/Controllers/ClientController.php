@@ -20,7 +20,7 @@ class ClientController extends Controller
 
     public function Data()
     {
-        $cobajoins = DB::table('evals')->select('alternatifs.nama', 'kriterias.nama', 'klasifikasis.klasifikasi')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.klasifikasi')->join('alternatifs', 'evals.alternatif', '=', 'alternatifs.id')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->get();
+        $cobajoins = DB::table('evals')->select('alternatifs.nama as kecamatan', 'kriterias.nama as kriteria', 'evals.nilai as nilai', 'klasifikasis.klasifikasi as klasifikasi')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->join('alternatifs', 'evals.alternatif', '=', 'alternatifs.id')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->get();
         // dd($cobajoins);
         $getalternatifs = Alternatif::get();
         $getkriterias = Kriteria::get();
@@ -36,7 +36,13 @@ class ClientController extends Controller
 
     public function Analisa()
     {
-        return view('pages/client/analisa');
+        $arrayall = Kustom::LeavingEntering();
+        $arraynet = Kustom::Net();
+        return view(
+            'pages/client/analisa',
+            ['tip' => $arrayall[0]],
+            ['arraynet' => $arraynet]
+        );
     }
 
     public function Pemalang()

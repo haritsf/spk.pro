@@ -12,6 +12,7 @@ use App\Klasifikasi;
 use App\Pengguna;
 use App\Preferensi;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
 
@@ -29,13 +30,17 @@ class AdminController extends Controller
 
     public function Home()
     {
+        $getnet = Kustom::Net();
+        $countall = array();
         $countalternatifs = Alternatif::count();
         $countkriterias = Kriteria::count();
+        array_push($countall, $countalternatifs, $countkriterias);
         // $getall = Alternatif::with('evals','kriteria')->get();
         return view(
             'pages/admin/home',
-            ['countalternatifs' => $countalternatifs],
-            ['countkriterias' => $countkriterias]
+            ['countalternatifs' => $countall[0]],
+            // ['countkriterias' => $countall[1]],
+            ['getnet' => $getnet]
         );
     }
 
@@ -122,10 +127,24 @@ class AdminController extends Controller
 
     public function KecamatanCreate(Request $request)
     {
-        $id = $request->id;
-        $nama = $request->nama;
-        $kode = $request->kode;
-        Alternatif::create($request->all());
+        DB::table('alternatifs')->insert([
+            'nama' => $request->nama,
+            'kode' => $request->kode
+        ]);
+
+        $getid = DB::table('alternatifs')->orderBy('id', 'desc')->first();
+        // dd($getid->id);
+
+        $panjang = count($request->kriteria) + 1;
+        for ($i = 1; $i < $panjang; $i++) {
+            DB::table('evals')->insert([
+                'alternatif' => $getid->id,
+                'kriteria' => "$i",
+                'nilai' => $request->kriteria[$i - 1],
+                'submit_by' => Auth::user()->id
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Kecamatan Berhasil di Tambah');
     }
 
@@ -148,13 +167,14 @@ class AdminController extends Controller
     public function KecamatanDelete($id)
     {
         DB::table('alternatifs')->where('id', $id)->delete();
+        DB::table('evals')->where('alternatif', $id)->delete();
         return redirect()->back()->with('danger', 'Kecamatan Berhasil di Hapus');
     }
 
     public function KriteriaView($id)
     {
-        // $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
-        $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai', 'klasifikasis.klasifikasi')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->where('evals.kriteria', '=', $id)->get();
+        $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
+        // $datas = DB::table('evals')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai', 'klasifikasis.klasifikasi')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->where('evals.kriteria', '=', $id)->get(); 
         // dd($datas);
 
         $getkriteria = DB::table('kriterias')->find($id);

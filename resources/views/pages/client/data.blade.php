@@ -42,9 +42,10 @@
                                 </thead>
                                 <tbody>
                                     @php
+                                    $alternatifs = Kustom::NamaAlternatifs();
                                     for ($id=1; $id <= Kustom::CountAlternatifs() ; $id++) { 
                                         echo '<tr align="center">';
-                                        echo '<td>' .'A'.$id.'</td>';
+                                        echo '<td align="left">'.$alternatifs[$id-1]['nama'].'</td>';
                                         $getevals = Kustom::JoinanTabel($id);
                                         // dd($getevals);
                                         foreach ($getevals as $evals) {

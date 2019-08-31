@@ -10,32 +10,25 @@
     <div class="col-lg-6">
       <div class="card shadow rounded">
         <div class="card-body">
-          @php
-          asort($arraynet);
-          $no = 1;
-          @endphp
-          <table width="100%" class="table table-striped table-bordered table-hover table-md" id="totalPref">
+          <table width="100%" class="table table-striped table-bordered table-hover table-md" id="Net">
             <thead>
-              <tr>
-                {{-- <th>
-                                    <center>Ranking</center>
-                                </th>
-                                <th>
-                                    <center>Kecamatan</center>
-                                </th> --}}
-                <th>
-                  <center>Netflow</center>
-                </th>
+              <tr align="center">
+                <th>Netflow</th>
+                <th>Kecamatan</th>
               </tr>
             </thead>
             <tbody>
+              @php
+                asort($arraynet);
+              @endphp
               @foreach ($arraynet as $net => $value)
-                <tr align="center">
-                  <td>{{number_format($value, 2)}}</td>
-                </tr>
+              <tr align="center">
+                <td>{{number_format($value['net'], 2)}}</td>
+                <td>{{$value['kecamatan']}}</td>
+              </tr>
               @endforeach
             </tbody>
-          </table>
+            </table>
         </div>
       </div>
     </div>

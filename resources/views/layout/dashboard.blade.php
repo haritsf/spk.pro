@@ -33,34 +33,44 @@
   <script src="{{url('js/scripts.js')}}"></script>
   <script src="{{url('js/custom.js')}}"></script>
 
-  {{-- <script src="{{url('modules/popper.js')}}"></script> --}}
-  {{-- <script src="{{url('modules/tooltip.js')}}"></script> --}}
-  {{-- <script src="{{url('modules/jquery-ui/jquery-ui.min.js')}}"></script> --}}
-  {{-- <script src="{{url('js/lodash.js')}}"></script> --}}
+  <script src="{{url('modules/jquery-ui/jquery-ui.min.js')}}"></script>
+  <script src="{{url('js/lodash.js')}}"></script>
   <script>
     $(document).ready(function() {
-      $('#DataTables, #Tables').DataTable({
-        'paging'      : true,
-        'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : true
-      });
-    });
-  </script>
-  <script>
-      $(document).ready(function() {
-        $('#LeavingEntering').DataTable({
-          'paging'      : false,
+        $('#DataTables, #Tables').DataTable({
+          'paging'      : true,
           'lengthChange': true,
           'searching'   : true,
-          'ordering'    : false,
+          'ordering'    : true,
           'info'        : true,
-          'autoWidth'   : false
+          'autoWidth'   : true
         });
       });
-    </script>
+  </script>
+  <script>
+    $(document).ready(function() {
+        $('#Net').DataTable({
+          'paging'      : false,
+          'lengthChange': false,
+          'searching'   : false,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : true
+        });
+      });
+  </script>
+  <script>
+    $(document).ready(function() {
+          $('#LeavingEntering').DataTable({
+            'paging'      : false,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : false,
+            'info'        : true,
+            'autoWidth'   : false
+          });
+        });
+  </script>
 
 </head>
 
@@ -199,9 +209,6 @@
       </section>
     </div>
 
-    {{-- <script src="{{url('modules/sweetalert/sweetalert.min.js')}}"></script> --}}
-    {{-- <script src="{{url('js/page/modules-sweetalert.js')}}"></script> --}}
-    {{-- <script src="{{url('js/page/modules-toastr.js')}}"></script> --}}
 </body>
 
 </html>

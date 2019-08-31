@@ -64,25 +64,25 @@
           <h2>Ranking</h2>
         </div>
         <div class="card-body">
-          @php
-          asort($arraynet);
-          $no = 1;
-          @endphp
-          <table width="100%" class="table table-striped table-bordered table-hover table-md">
+          <table width="100%" class="table table-striped table-bordered table-hover table-md" id="Net">
             <thead align="center">
               <tr>
-                <th>No.</th>
+                <th>Kecamatan</th>
                 <th>Netflow</th>
               </tr>
             </thead>
             <tbody align="center">
+              @php
+                asort($arraynet);
+                $no = 1;
+              @endphp
               @foreach ($arraynet as $net => $value)
               <tr>
-                <td>A{{$no}}</td>
-                <td>{{number_format($value, 2)}}</td>
+                <td>{{$value['kecamatan']}}</td>
+                <td>{{number_format($value['net'], 2)}}</td>
               </tr>
               @php
-               $no++;   
+                $no++;
               @endphp
               @endforeach
             </tbody>

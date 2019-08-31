@@ -1,7 +1,6 @@
 @extends('layout.dashboard')
 
 @section('content')
-{{-- {{ dd($alternatifs)}} --}}
 
 <div class="container">
   @if ($message = Session::get('success'))
@@ -37,18 +36,52 @@
         aria-expanded="false" aria-controls="collapseTambah">
         Tambah
       </button>
-      {{-- <button class="btn btn-primary" id="toastr-4">Launch</button> --}}
       <div class="collapse" id="collapseTambah">
         <form action="{{route('kecamatan.create')}}" method="post" class="form">
           @csrf
           <br>
-          <div class="form-group">
-            <h5 class="label-control">Nama Kecamatan</h5>
-            <input class="form-control" type="text" name="nama" placeholder="Daerah...">
+          <div class="row">
+            <div class="col-md">
+              {{-- <input type="hidden" name="id" value=""> --}}
+              <div class="form-group">
+                <h6 class="label-control">Nama Kecamatan</h6>
+                <input class="form-control" type="text" name="nama" placeholder="Daerah...">
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <h6 class="label-control">Kode</h6>
+                <input class="form-control" type="text" name="kode" placeholder="...">
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <h5 class="label-control">Kode</h5>
-            <input class="form-control" type="text" name="kode" placeholder="...">
+          <div class="row mb-3">
+            <div class="col-md">
+              <h6 class="label-control">Kelerengan</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
+            <div class="col-md">
+              <h6 class="label-control">Penggunaan Lahan</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
+            <div class="col-md">
+              <h6 class="label-control">Rawan Bencana Longsor</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md">
+              <h6 class="label-control">Curah Hujan</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
+            <div class="col-md">
+              <h6 class="label-control">Cadangan Air Tanah</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
+            <div class="col-md">
+              <h6 class="label-control">Jenis Tanah</h6>
+              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="">
+            </div>
           </div>
           <button class="btn btn-success btn-md" type="submit">Proses</button>
         </form>

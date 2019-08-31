@@ -16,7 +16,7 @@
 // CLIENT
 Route::get('/', 'ClientController@Landing')->name('landing');
 Route::get('/data', 'ClientController@Data')->name('client.data');
-Route::get('/analisa', 'ProController@Analisa')->name('client.analisa');
+Route::get('/analisa', 'ClientController@Analisa')->name('client.analisa');
 Route::get('/pemalang', 'ClientController@Pemalang')->name('client.pemalang');
 
 // ADMIN
