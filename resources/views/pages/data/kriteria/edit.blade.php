@@ -1,4 +1,4 @@
-{{-- {{dd($kriteria)}} --}}
+{{-- {{dd($data['kriteria'])}} --}}
 @extends('layout.dashboard')
 
 @section('content')
@@ -10,27 +10,32 @@
     <div class="col-6">
         <div class="card shadow rounded">
             <div class="card-body">
-                <form action="" method="post" class="form">
+                <form action="" method="POST" class="form">
                     @csrf
                     <br>
                     <div class="form-group">
                         <h5 class="label-control">ID Kriteria</h5>
-                        <input class="form-control" disabled type="number" name="nama" value="{{$kriteria->id}}">
+                        <input class="form-control" disabled type="number" name="nama" value="{{$data['kriteria']->id}}">
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">Nama</h5>
-                        <input class="form-control" type="text" name="nama" value="{{$kriteria->nama}}">
+                        <input class="form-control" type="text" name="nama" value="{{$data['kriteria']->nama}}">
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">Parameter</h5>
-                        <select class="form-control select2" style="width: 50%" name="minmaks" required>
-                            <option name="minmaks" value="{{$kriteria->minmaks}}">{{ $kriteria->minmaks }}</option>
+                        <select class="form-control select2" style="width: 50%" name="minmaks" value="{{$data['kriteria']->minmaks}}" required>
+                            <option name="minmaks" value="{{$data['kriteria']->minmaks}}">{{$data['kriteria']->minmaks}}</option>
+                            @if ($data['kriteria']->minmaks == 'min')
+                            <option value="maks">maks</option>
+                            @elseif ($data['kriteria']->minmaks != 'min')
+                            <option value="min">min</option>
+                            @endif
                         </select>
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">Tipe</h5>
-                        <select class="form-control select2" style="width: 100%" name="prefs" required>
-                            <option name="pref" value="{{$kriteria->pref}}">{{ $kriteria->pref }}</option>
+                        <select class="form-control select2" style="width: 100%" name="prefs" value="{{$data['kriteria']->pref}}" required>
+                            <option name="prefs" value="{{$prefs[$data['kriteria']->id-1]->nama}}">{{$prefs[($data['kriteria']->pref)-1]->nama}}</option>
                             @foreach ($prefs as $pref)
                             <option name="pref" value="{{$pref->id}}">{{$pref->nama}}</option>
                             @endforeach
@@ -38,17 +43,17 @@
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">q</h5>
-                        <input class="form-control" type="number" name="q" value="{{$kriteria->q}}">
+                        <input class="form-control" type="number" name="q" value="{{$data['kriteria']->q}}">
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">p</h5>
-                        <input class="form-control" type="number" name="p" value="{{$kriteria->p}}">
+                        <input class="form-control" type="number" name="p" value="{{$data['kriteria']->p}}">
                     </div>
                     <div class="form-group">
                         <h5 class="label-control">Bobot</h5>
-                        <input disabled class="form-control" type="number" name="bobot" value="{{$kriteria->bobot}}">
+                        <input disabled class="form-control" type="number" name="bobot" value="{{$data['kriteria']->bobot}}">
                     </div>
-                    <button class="btn btn-success btn-md disabled" type="submit" id="swal-2">Proses</button>
+                    <button class="btn btn-success btn-md disabled" type="submit">Proses</button>
                 </form>
             </div>
         </div>

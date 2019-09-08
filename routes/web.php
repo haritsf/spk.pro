@@ -37,9 +37,10 @@ Route::get('/admin/data/kriteria', 'AdminController@KriteriaRead')->name('kriter
 Route::get('/admin/data/preferensi', 'AdminController@Preferensi')->name('preferensi.read');
 
 // KRITERIA
-Route::get('/admin/data/kriteria/view/{id}', 'AdminController@KriteriaView')->name('kriteria.view');
+Route::get('/admin/kriteria/view/{id}', 'AdminController@KriteriaView')->name('kriteria.view');
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@KriteriaEdit')->name('kriteria.edit');
-Route::post('/admin/data/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
+Route::post('/admin/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
+Route::post('/admin/kriteria/bobot/edit', 'AdminController@BobotEdit')->name('bobot.edit');
 
 
 // KECAMATAN

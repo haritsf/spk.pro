@@ -4,14 +4,14 @@
 <div class="container">
   @section('pages','data')
   @section('title','kriteria')
-  <div class="card shadow rounded">
+  {{-- <div class="card shadow rounded">
     <div class="card-body">
       <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#EditBobot"
         aria-expanded="false" aria-controls="EditBobot">
         Atur Bobot
       </button>
       <div class="collapse" id="EditBobot">
-        <form action="" method="POST">
+        <form action="{{route('bobot.edit')}}" method="POST">
           @csrf
           <br>
           <div class="row">
@@ -20,8 +20,8 @@
               <div class="form-group">
                 <h6 class="label-control">{{$kriteria->nama}}</h6>
                 <div class="input-group">
-                  <input class="form-control" value="{{$kriteria->bobot*100}}" type="number" name="{{$kriteria->id}}"
-                    step="1">
+                  <input type="hidden" name="id[]" value="{{$kriteria->id}}">
+                  <input class="form-control" value="{{$kriteria->bobot}}" type="number" name="bobot[]" step="1">
                   <div class="input-group-append">
                     <div class="input-group-text">%</div>
                   </div>
@@ -34,7 +34,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <div class="row">
     <div class="col-12">
@@ -66,7 +66,7 @@
                 <td>{{ $data->pref }}</td>
                 <td>{{ $data->q }}</td>
                 <td>{{ $data->p }}</td>
-                <td>{{ $data->bobot*100 }}%</td>
+                <td>{{ $data->bobot }}%</td>
                 <td>
                   <a class="btn btn-warning btn-md" href="{{route('kriteria.edit',$data->id)}}">Edit</a>
                 </td>

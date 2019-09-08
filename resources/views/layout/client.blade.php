@@ -5,22 +5,23 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     name="viewport">
-  <title>spk.promethee</title>
-  {{-- <link rel="icon" type="image/png" href="{{url('img/logo.png')}}" sizes="32x32"> --}}
+  <title>spk.pro</title>
   <link rel="icon" type="image/png" href="{{url('img/favicon-32x32.png')}}" sizes="32x32">
   <link rel="icon" type="image/png" href="{{url('img/favicon-16x16.png')}}" sizes="16x16">
   <link rel="stylesheet" href="{{url('modules/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{url('modules/bootstrap-social/bootstrap-social.css')}}">
   <link rel="stylesheet" href="{{url('modules/fontawesome/css/all.min.css')}}">
-  <link rel="stylesheet" href="{{url('css/style.css')}}">
-  <link rel="stylesheet" href="{{url('css/components.css')}}">
+  <link rel="stylesheet" href="{{url('css/style.min.css')}}">
+  <link rel="stylesheet" href="{{url('css/components.min.css')}}">
+  {{-- <link rel="stylesheet" href="{{url('css/style.css')}}">
+  <link rel="stylesheet" href="{{url('css/components.css')}}"> --}}
   <link rel="stylesheet" href="{{url('css/custom.css')}}">
   <link rel="stylesheet" href="{{url('css/landing.css')}}">
   <link rel="stylesheet" href="{{url('css/aos.css')}}">
   <link rel="stylesheet" href="{{url('css/animate.css')}}">
-  {{-- <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}"> --}}
+  <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}">
 
-  {{-- <script src="{{url('modules/datatables/datatables.min.js')}}"></script> --}}
+  <script src="{{url('modules/datatables/datatables.min.js')}}"></script>
   <script src="{{url('modules/jquery.min.js')}}"></script>
   <script src="{{url('modules/bootstrap/js/bootstrap.min.js')}}"></script>
   <script src="{{url('js/stisla.js')}}"></script>
@@ -34,18 +35,18 @@
     }
   </style>
 
-  {{-- <script>
-    $(document).ready(function() {
-            $('#DataTables').DataTable({
-              'paging'      : true,
-              'lengthChange': true,
-              'searching'   : true,
-              'ordering'    : true,
-              'info'        : true,
-              'autoWidth'   : true
-            });
-          });
-  </script> --}}
+<script>
+  $(document).ready(function() {
+      $('#DataTables').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true
+      });
+    });
+</script>
 
 </head>
 
@@ -59,7 +60,7 @@
           <i class="fas fa-bars"></i>
         </button>
 
-        <ul class="navbar-nav mr-auto ml-lg-3 align-items-lg-center">
+        <ul class="navbar-nav mr-auto ml-lg-3 align-items-lg-center" style="font-weight:normal">
           <li class="nav-item">
             <a href="{{route('client.data')}}" class="nav-link">Data</a>
           </li>
@@ -89,8 +90,8 @@
         <div class="col-md-5">
           <h3 class="text-capitalize" style="font-weight:500">promethee</h3>
           <div class="pr-lg-5">
-            <p>Stisla was created by <a href="https://twitter.com/mhdnauvalazhar">Muhamad Nauval Azhar</a>
-              to help developers create their own UI designs for the dashboard. Stisla is free for anyone,
+            <p>promethee was created by <a href="https://twitter.com/haritsf">Harits Fathuddin</a>
+              to help developers create their own Decision for Critical Land. promethee is free for anyone,
               support us by becoming a sponsor and keeping this project alive.</p>
             <p>&copy; Stisla. With <i class="fas fa-heart text-danger"></i> from Indonesia</p>
             <div class="mt-4 social-links">
@@ -99,7 +100,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-7">
+        {{-- <div class="col-md-7">
           <div class="row">
             <div class="col-md-4">
               <h4>Core</h4>
@@ -134,7 +135,7 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </footer>

@@ -31,17 +31,32 @@ class ProController extends Controller
         $arrayall = $this->LeavingEntering();
         $namaalternatifs = Kustom::NamaAlternatifs();
         $arraynet = array();
-        $no = 1;
+        // dd($arrayall);
         for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
             $net = $arrayall[2][$n] - $arrayall[4][$n];
             $temp = [
                 'kecamatan' => $namaalternatifs[$n]['nama'],
                 'net' => $net
             ];
-            $no++;
             array_push($arraynet, $temp);
         }
-        // dd($arraynet);
+
+        $ranks = array();
+        foreach ($arraynet as $key => $row) {
+            $ranks[$key] = $row['net'];
+        }
+        array_multisort($ranks, SORT_ASC, $arraynet);
+
+        $no = 1;
+        for ($x = 0; $x < count($arraynet); $x++) {
+
+            if ($x > 0 && $arraynet[$x]['net'] == $arraynet[$x - 1]['net']) {
+                $arraynet[$x]['rank'] = $arraynet[$x - 1]['rank'];
+            } else {
+                $arraynet[$x]['rank'] = $no;
+                $no++;
+            }
+        }
         return $arraynet;
     }
 
@@ -62,8 +77,6 @@ class ProController extends Controller
 
     public function LeavingEntering()
     {
-        // define("MAX_COLS", Kustom::CountAlternatifs());
-
         $pref = $this->Preferensi();
         $pref = $pref[1];
 
@@ -92,12 +105,12 @@ class ProController extends Controller
                 $tlf = $tlf + $hasil[$y][$x]['value'];
                 $tef = $tef + $hasil[$x][$y]['value'];
             }
-            array_push($arraytlf, number_format($tlf, 2));
-            array_push($arraytef, number_format($tef, 2));
+            array_push($arraytlf, number_format($tlf, 4));
+            array_push($arraytef, number_format($tef, 4));
             $leaving = $tlf / (Kustom::CountAlternatifs() - 1);
             $entering = $tef / (Kustom::CountAlternatifs() - 1);
-            array_push($arrayleaving, number_format($leaving, 2));
-            array_push($arrayentering, number_format($entering, 2));
+            array_push($arrayleaving, number_format($leaving, 4));
+            array_push($arrayentering, number_format($entering, 4));
         }
         // dd($arraytef);
         // dd($arrayentering);

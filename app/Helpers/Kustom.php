@@ -6,6 +6,7 @@ use App\Kriteria;
 use App\Alternatif;
 use App\Evaluasi;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Routing\Route;
 
 class Kustom
 {
@@ -14,24 +15,39 @@ class Kustom
         $arrayall = Kustom::LeavingEntering();
         $namaalternatifs = Kustom::NamaAlternatifs();
         $arraynet = array();
-        $no = 1;
+        // dd($arrayall);
         for ($n = 0; $n < Kustom::CountAlternatifs(); $n++) {
             $net = $arrayall[2][$n] - $arrayall[4][$n];
             $temp = [
                 'kecamatan' => $namaalternatifs[$n]['nama'],
                 'net' => $net
             ];
-            $no++;
             array_push($arraynet, $temp);
         }
-        // dd($arraynet);
+
+        $ranks = array();
+        foreach ($arraynet as $key => $row) {
+            $ranks[$key] = $row['net'];
+        }
+        array_multisort($ranks, SORT_ASC, $arraynet);
+
+        $no = 1;
+        for ($x = 0; $x < count($arraynet); $x++) {
+            // var_dump("now : " . $arraynet[$x]['net']);
+            // $x > 0 ? var_dump("before : " . $arraynet[$x-1]['net']) : '';
+
+            if ($x > 0 && $arraynet[$x]['net'] == $arraynet[$x - 1]['net']) {
+                $arraynet[$x]['rank'] = $arraynet[$x - 1]['rank'];
+            } else {
+                $arraynet[$x]['rank'] = $no;
+                $no++;
+            }
+        }
         return $arraynet;
     }
 
     public static function LeavingEntering()
     {
-        // define("MAX_COLS", Kustom::CountAlternatifs());
-
         $pref = Kustom::Preferensi();
         $pref = $pref[1];
 

@@ -65,6 +65,7 @@
           <table width="100%" class="table table-striped table-bordered table-hover table-md" id="Net">
             <thead>
               <tr align="center">
+                <th>Rank</th>
                 <th>Netflow</th>
                 <th>Kecamatan</th>
               </tr>
@@ -72,6 +73,7 @@
             <tbody>
               @foreach ($getnet as $net => $value)
               <tr align="center">
+                <td>{{$value['rank']}}</td>
                 <td>{{number_format($value['net'], 2)}}</td>
                 <td>{{$value['kecamatan']}}</td>
               </tr>

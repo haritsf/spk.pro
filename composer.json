@@ -38,7 +38,10 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ]
+        ],
+        "files": [
+            "app/Helpers/Kustom.php"
+          ]
     },
     "autoload-dev": {
         "psr-4": {

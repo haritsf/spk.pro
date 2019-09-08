@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-body">
                         <div class="col-lg-12" id="evals">
-                            <table width="100%" class="table table-striped table-bordered table-hover table-md">
+                            <table id="DataTables" width="100%" class="table table-striped table-bordered table-hover table-md">
                                 <thead>
                                     <tr align="center" style="text-transform:lowercase">
                                         <th>Kecamatan</th>

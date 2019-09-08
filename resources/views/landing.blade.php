@@ -133,19 +133,7 @@
     </div>
 </section>
 
-<section class="download-section" class="bg-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-7">
-                <h2>Start Your Awesome Project</h2>
-                <p class="lead">Start your amazing project with Stisla, don't start designing from scratch.</p>
-            </div>
-            <div class="col-md-5 text-right">
-                <a href="https://getstisla.com/download" class="btn btn-primary btn-lg">Download Stisla Now</a>
-            </div>
-        </div>
-    </div>
-</section>
+<section class="download-section"></section>
 
 <section class="before-footer">
     <div class="container">

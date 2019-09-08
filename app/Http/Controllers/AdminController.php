@@ -60,8 +60,46 @@ class AdminController extends Controller
         // $kriterias = Kriteria::all();
         $kriterias = DB::table('kriterias')->select('kriterias.id', 'kriterias.nama', 'kriterias.minmaks', 'prefs.nama as pref', 'kriterias.q', 'kriterias.p', 'kriterias.bobot')->join('prefs', 'prefs.id', '=', 'kriterias.pref')->get();
         $prefs = Preferensi::all();
-        // dd($kriterias);
+        // dd($temp);
         return view('pages/data/kriteria', ['kriterias' => $kriterias], ['prefs' => $prefs]);
+    }
+
+    public function BobotUpdate()
+    {
+        $kriterias = Kriteria::all();
+        $temp = 0;
+        for ($n = 0; $n < Kriteria::count(); $n++) {
+            $temp = $temp + $kriterias[$n]->bobot;
+        }
+        if ($temp > 100) {
+            echo 'Jumlah Bobot lebih dari 100%, atur kembali';
+        } elseif ($temp < 100) {
+            echo 'Jumlah Bobot kurang dari 100%';
+        } else {
+            echo 'Jumlah Bobot pas 100%';
+        }
+        die();
+    }
+
+    public function BobotEdit(Request $request)
+    {
+        $array = array();
+        $array = [
+            'id' => $request->id,
+            'bobot' => $request->bobot
+        ];
+        // dd($array);
+        $panjang = count($request->bobot) + 1;
+        // for ($i = 1; $i < $panjang; $i++) {
+        //     DB::table('kriterias')->update([
+        //         'id' => $array['id'][$i - 1],
+        //         'bobot' => $array['bobot'][$i - 1]
+        //     ]);
+        //     save();
+        // }
+        // dd($array);
+        // $array -> save();
+        return redirect()->back();
     }
 
     public function Preferensi()
@@ -166,27 +204,31 @@ class AdminController extends Controller
 
     public function KecamatanDelete($id)
     {
-        DB::table('alternatifs')->where('id', $id)->delete();
         DB::table('evals')->where('alternatif', $id)->delete();
+        DB::table('alternatifs')->where('id', $id)->delete();
         return redirect()->back()->with('danger', 'Kecamatan Berhasil di Hapus');
     }
 
     public function KriteriaView($id)
     {
-        $datas = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
+        $alternatifs = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
         // $datas = DB::table('evals')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai', 'klasifikasis.klasifikasi')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->where('evals.kriteria', '=', $id)->get(); 
         // dd($datas);
 
-        $getkriteria = DB::table('kriterias')->find($id);
-        return view('pages/data/kriteria/view', ['datas' => $datas], ['getkriteria' => $getkriteria]);
+        $datas['getkriteria'] = DB::table('kriterias')->find($id);
+        $datas['getklasifikasi'] = DB::table('klasifikasis')->find($id);
+        // $getkriteria = DB::table('kriterias')->find($id);
+        // dd($datas);
+        return view('pages/data/kriteria/view', ['alternatifs' => $alternatifs], ['datas' => $datas]);
     }
 
     public function KriteriaEdit($id)
     {
-        $kriteria = Kriteria::find($id);
+        $data['kriteria'] = Kriteria::find($id);
+        $data['allkriteria'] = Kriteria::all();
         $prefs = Preferensi::all();
-        // dd($kriteria);
-        return view('pages/data/kriteria/edit', ['kriteria' => $kriteria], ['prefs' => $prefs]);
+        // dd($data['allkriteria']);
+        return view('pages/data/kriteria/edit', ['data' => $data], ['prefs' => $prefs]);
     }
 
     public function KriteriaUpdate(Request $request)

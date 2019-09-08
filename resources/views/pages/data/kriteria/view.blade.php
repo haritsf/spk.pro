@@ -1,16 +1,23 @@
+{{-- {{dd($datas)}} --}}
 @extends('layout.dashboard')
 @section('content')
 <div class="container">
     @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{$message}}
+    <div class="alert alert-success alert-dismissible fade show alert-has-icon" role="alert">
+        <div class="alert-icon">
+            <i class="far fa-check-circle"></i>
+        </div>
+        <div class="alert-body">
+            <div class="alert-title" style="font-weight:normal">Sukses</div>
+            {{$message}}
+        </div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     @endif
     @section('pages','kriteria')
-    @section('title',$getkriteria->nama)
+    @section('title',$datas['getkriteria']->nama)
 
     <div class="row">
         <div class="col-12">
@@ -20,30 +27,27 @@
                         <thead>
                             <tr align="center">
                                 <th>No.</th>
-                                <th>ID</th>
+                                {{-- <th>ID</th> --}}
                                 <th>Kecamatan</th>
                                 <th>Nilai</th>
-                                {{-- <th>Klasifikasi</th> --}}
                                 <th>Opsi</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($datas as $data)
+                            @foreach ($alternatifs as $data)
                             <tr align="center">
                                 <td>{{ $data->alternatif }}</td>
-                                <td>{{ $data->id }}</td>
+                                {{-- <td>{{ $data->id }}</td> --}}
                                 <td>{{ $data->nama }}</td>
                                 <td>{{ $data->nilai }}</td>
-                                {{-- <td>{{ $data->klasifikasis->nilai }}</td> --}}
                                 <td>
-                                    <button class="btn btn-warning btn-md" data-toggle="modal"
-                                        data-target="#modaledit{{$data->id}}">Edit</button>
+                                    <button class="btn btn-warning btn-md" data-toggle="modal" data-target="#modaledit{{$data->id}}">Edit</button>
                                     <div class="modal fade" id="modaledit{{$data->id}}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Edit {{$getkriteria->nama}}</h5>
+                                                    <h5 class="modal-title">Edit {{$datas['getkriteria']->nama}}</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="{{route('kriteria.update')}}" method="POST">
@@ -52,26 +56,17 @@
                                                         <br>
                                                         <div class="form-group">
                                                             <h5 class="label-control">Kecamatan</h5>
-                                                            <input class="form-control" disabled type="text" name="nama"
-                                                                value="{{$data->nama}}">
+                                                            <input class="form-control" disabled type="text" name="nama" value="{{$data->nama}}">
                                                         </div>
                                                         <div class="form-group">
                                                             <h5 class="label-control">Nilai</h5>
-                                                            <input autofocus class="form-control" type="number"
-                                                                name="nilai" value="{{$data->nilai}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <h5 class="label-control">Klasifikasi</h5>
-                                                            {{-- <input disabled class="form-control" type="text" value="{{$data->klasifikasi}}">
-                                                            --}}
+                                                            <input autofocus class="form-control" type="number" name="nilai" value="{{$data->nilai}}">
                                                         </div>
                                                 </div>
                                                 <div class="modal-footer bg-whitesmoke br">
-                                                    <button type="button" class="btn btn-md btn-danger"
-                                                        data-dismiss="modal">Tutup</button>
+                                                    <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Tutup</button>
                                                     <button type="submit" class="btn btn-md btn-success">Simpan</button>
                                                 </div>
-
                                                 </form>
                                             </div>
                                         </div>
@@ -80,10 +75,8 @@
                             </tr>
                             @endforeach
                         </tbody>
-
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
