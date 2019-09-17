@@ -1,4 +1,3 @@
-{{-- {{dd($datas)}} --}}
 @extends('layout.dashboard')
 @section('content')
 <div class="container">
@@ -20,6 +19,38 @@
     @section('title',$datas['getkriteria']->nama)
 
     <div class="row">
+        <div class="col-6">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <button class="btn btn-info btn-md" type="button" data-toggle="collapse" data-target="#collapseKet"
+                        aria-expanded="false" aria-controls="collapseKet">Keterangan</button>
+                    <div class="collapse" id="collapseKet">
+                        <table width="100%" class="table table-striped table-bordered table-hover table-md" id="Ket">
+                            <thead>
+                                <tr align="center">
+                                    <th>NILAI</th>
+                                    <th>KLASIFIKASI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($datas['getklasifikasi'] as $data)
+                                @if ($data->nama == $datas['getkriteria']->nama)
+                                <tr align="center">
+                                    <td>{{$data->nilai}}</td>
+                                    <td>{{$data->klasifikasi}}</td>
+                                </tr>
+                                @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
         <div class="col-12">
             <div class="card shadow rounded">
                 <div class="card-body">
@@ -27,7 +58,6 @@
                         <thead>
                             <tr align="center">
                                 <th>No.</th>
-                                {{-- <th>ID</th> --}}
                                 <th>Kecamatan</th>
                                 <th>Nilai</th>
                                 <th>Opsi</th>
@@ -38,7 +68,6 @@
                             @foreach ($alternatifs as $data)
                             <tr align="center">
                                 <td>{{ $data->alternatif }}</td>
-                                {{-- <td>{{ $data->id }}</td> --}}
                                 <td>{{ $data->nama }}</td>
                                 <td>{{ $data->nilai }}</td>
                                 <td>
@@ -50,8 +79,8 @@
                                                     <h5 class="modal-title">Edit {{$datas['getkriteria']->nama}}</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('kriteria.update')}}" method="POST">
-                                                        @csrf
+                                                    <form action="{{route('evaluasi.update')}}" method="POST">
+                                                        {{ csrf_field() }}
                                                         <input type="hidden" name="id" value="{{$data->id}}">
                                                         <br>
                                                         <div class="form-group">

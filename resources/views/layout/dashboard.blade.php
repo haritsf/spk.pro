@@ -64,11 +64,23 @@
             'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
-            'info'        : true,
+            'info'        : false,
             'autoWidth'   : true
           });
         });
   </script>
+  <script>
+      $(document).ready(function() {
+            $('#Ket').DataTable({
+              'paging'      : false,
+              'lengthChange': false,
+              'searching'   : false,
+              'ordering'    : false,
+              'info'        : true,
+              'autoWidth'   : true
+            });
+          });
+    </script>
 </head>
 
 {{-- {{ dd(Auth::user()->username) }} --}}
@@ -209,10 +221,6 @@
         </div>
       </section>
     </div>
-
-    
-    
-    
 </body>
 
 </html>

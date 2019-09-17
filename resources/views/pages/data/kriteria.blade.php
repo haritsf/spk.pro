@@ -4,44 +4,25 @@
 <div class="container">
   @section('pages','data')
   @section('title','kriteria')
-  {{-- <div class="card shadow rounded">
-    <div class="card-body">
-      <button class="btn btn-primary btn-md" type="button" data-toggle="collapse" data-target="#EditBobot"
-        aria-expanded="false" aria-controls="EditBobot">
-        Atur Bobot
-      </button>
-      <div class="collapse" id="EditBobot">
-        <form action="{{route('bobot.edit')}}" method="POST">
-          @csrf
-          <br>
-          <div class="row">
-            @foreach ($kriterias as $kriteria)
-            <div class="col col-md-4">
-              <div class="form-group">
-                <h6 class="label-control">{{$kriteria->nama}}</h6>
-                <div class="input-group">
-                  <input type="hidden" name="id[]" value="{{$kriteria->id}}">
-                  <input class="form-control" value="{{$kriteria->bobot}}" type="number" name="bobot[]" step="1">
-                  <div class="input-group-append">
-                    <div class="input-group-text">%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endforeach
-          </div>
-          <button class="btn btn-success btn-md" type="submit">Proses</button>
-        </form>
-      </div>
+  
+  @if ($message = Session::get('success'))
+  <div class="alert alert-success alert-dismissible fade show alert-has-icon" role="alert">
+    <div class="alert-icon">
+      <i class="far fa-check-circle"></i>
     </div>
-  </div> --}}
+    <div class="alert-body">
+      <div class="alert-title" style="font-weight:normal">Sukses</div>
+      {{$message}}
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
 
   <div class="row">
     <div class="col-12">
       <div class="card shadow rounded">
-        {{-- <div class="card-header">
-          <h3>BalaLabaLala</h3>
-        </div> --}}
         <div class="card-body">
           <table width="100%" class="table table-striped table-bordered table-hover table-md" id="DataTables">
             <thead>

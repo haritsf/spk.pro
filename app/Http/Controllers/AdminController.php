@@ -117,10 +117,14 @@ class AdminController extends Controller
 
     public function Klasifikasi()
     {
-        // $klasifikasi = Klasifikasi::all();
         $klasifikasi = DB::table('klasifikasis')->select('klasifikasis.id', 'kriterias.nama', 'klasifikasis.nilai', 'klasifikasis.klasifikasi')->join('kriterias', 'klasifikasis.kriteria', '=', 'kriterias.id')->get();
-        // dd($klasifikasi);
         return view('pages/data/klasifikasi', ['klasifikasi' => $klasifikasi]);
+    }
+
+    public function KlasifikasiUpdate(Request $request)
+    {
+        DB::table('klasifikasis')->where('id', $request->id)->update(['klasifikasi' => $request->klasifikasi]);
+        return redirect(route('klasifikasi.read'))->with('info', 'Klasifikasi Berhasil di Update');
     }
 
     public function Pengguna()
@@ -212,13 +216,9 @@ class AdminController extends Controller
     public function KriteriaView($id)
     {
         $alternatifs = DB::table('alternatifs')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai')->join('evals', 'alternatifs.id', '=', 'evals.alternatif')->where('evals.kriteria', '=', $id)->get();
-        // $datas = DB::table('evals')->select('alternatifs.id', 'alternatifs.nama', 'evals.id', 'evals.alternatif', 'evals.kriteria', 'evals.nilai', 'klasifikasis.klasifikasi')->join('alternatifs', 'alternatifs.id', '=', 'evals.alternatif')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->where('evals.kriteria', '=', $id)->get(); 
-        // dd($datas);
 
         $datas['getkriteria'] = DB::table('kriterias')->find($id);
-        $datas['getklasifikasi'] = DB::table('klasifikasis')->find($id);
-        // $getkriteria = DB::table('kriterias')->find($id);
-        // dd($datas);
+        $datas['getklasifikasi'] = DB::table('klasifikasis')->select('klasifikasis.id', 'kriterias.nama', 'klasifikasis.nilai', 'klasifikasis.klasifikasi')->join('kriterias', 'klasifikasis.kriteria', '=', 'kriterias.id')->get();
         return view('pages/data/kriteria/view', ['alternatifs' => $alternatifs], ['datas' => $datas]);
     }
 
@@ -227,11 +227,23 @@ class AdminController extends Controller
         $data['kriteria'] = Kriteria::find($id);
         $data['allkriteria'] = Kriteria::all();
         $prefs = Preferensi::all();
-        // dd($data['allkriteria']);
         return view('pages/data/kriteria/edit', ['data' => $data], ['prefs' => $prefs]);
     }
 
     public function KriteriaUpdate(Request $request)
+    {
+        DB::table('kriterias')->where('id', $request->id)->update([
+            'nama' => $request->nama,
+            'minmaks' => $request->minmaks,
+            'pref' => $request->pref,
+            'q' => $request->q,
+            'p' => $request->p
+        ]);
+        // dd($request);
+        return redirect(route('kriteria.read'))->with('success', 'Kriteria berhasil di Update');
+    }
+
+    public function EvaluasiUpdate(Request $request)
     {
         // dd($request->all());
         $update = Evaluasi::find($request->id);

@@ -19,21 +19,40 @@
                 @for($a = 1; $a <= Kustom::CountAlternatifs(); $a++)
                   <td>A{{$a}}</td>
                 @endfor
+                  <td>Leaving</td>
               </tr>
             </thead>
             <tbody align="center">
               <tr>
                 @for($y = 0; $y < Kustom::CountAlternatifs(); $y++)
+                  @php $temp = null; @endphp
                   @for($x = 0; $x < Kustom::CountAlternatifs(); $x++)
-                    {{-- <td>A</td> --}}
                     @if($x == $y)
                       <td><b>{{number_format($tip[$y][$x]['value'], 2)}}</b></td>
                     @else
                       <td>{{number_format($tip[$y][$x]['value'], 2)}}</td>
                     @endif
+                    @php $temp = $temp + $tip[$y][$x]['value']; @endphp
                   @endfor
+                  @php
+                  $temp = $temp / (Kustom::CountAlternatifs() - 1);
+                  @endphp
+                  <td style="background-color: #EEEEEE">{{number_format($temp, 2)}}</td>
               </tr>
                 @endfor
+              <tr>
+                  @for($y = 0; $y < Kustom::CountAlternatifs(); $y++)
+                  @php $temp = null; @endphp
+                  @for($x = 0; $x < Kustom::CountAlternatifs(); $x++)
+                    @php $temp = $temp + $tip[$x][$y]['value']; @endphp
+                  @endfor
+                  @php
+                  $temp = $temp / (Kustom::CountAlternatifs() - 1);
+                  @endphp
+                  <td style="background-color: #EEEEEE">{{number_format($temp, 2)}}</td>
+                  @endfor
+                  <td></td>
+              </tr>
             </tbody>
           </table>
         </div>

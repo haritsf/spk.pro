@@ -56,7 +56,7 @@
       </button>
       <div class="collapse" id="collapseTambah">
         <form action="{{route('kecamatan.create')}}" method="POST" class="form">
-          @csrf
+          {{ csrf_field() }}
           <br>
           <div class="row">
             <div class="col-md">
@@ -76,29 +76,60 @@
           <div class="row mb-3">
             <div class="col-md">
               <h6 class="label-control">Kelerengan</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Penggunaan Lahan</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Rawan Bencana Longsor</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md">
               <h6 class="label-control">Curah Hujan</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Cadangan Air Tanah</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Jenis Tanah</h6>
-              <input class="form-control" type="number" name="kriteria[]" placeholder="..." id="" required >
+              <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
             </div>
           </div>
           <button class="btn btn-success btn-md" type="submit">Proses</button>

@@ -36,12 +36,15 @@ Route::get('/admin/data/kecamatan', 'AdminController@KecamatanRead')->name('keca
 Route::get('/admin/data/kriteria', 'AdminController@KriteriaRead')->name('kriteria.read');
 Route::get('/admin/data/preferensi', 'AdminController@Preferensi')->name('preferensi.read');
 
-// KRITERIA
+// KRITERIA dan EVALUASI
 Route::get('/admin/kriteria/view/{id}', 'AdminController@KriteriaView')->name('kriteria.view');
 Route::get('/admin/data/kriteria/edit/{id}', 'AdminController@KriteriaEdit')->name('kriteria.edit');
-Route::post('/admin/kriteria/update', 'AdminController@KriteriaUpdate')->name('kriteria.update');
+Route::post('/admin/data/kriteria/update/{id}', 'AdminController@KriteriaUpdate')->name('kriteria.update');
+Route::post('/admin/evaluasi/update', 'AdminController@EvaluasiUpdate')->name('evaluasi.update');
 Route::post('/admin/kriteria/bobot/edit', 'AdminController@BobotEdit')->name('bobot.edit');
 
+// KLASIFIKASI
+Route::post('/admin/klasifikasi/update', 'AdminController@KlasifikasiUpdate')->name('klasifikasi.update');
 
 // KECAMATAN
 Route::post('/admin/data/kecamatan/create', 'AdminController@KecamatanCreate')->name('kecamatan.create');

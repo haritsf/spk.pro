@@ -22,7 +22,7 @@
           </button>
           <div class="collapse" id="collapseTambah">
             <form action="{{route('pengguna.create')}}" method="post" class="form">
-              @csrf
+              {{ csrf_field() }}
               <br>
               <div class="form-group">
                 <h5 class="label-control">Username</h5>

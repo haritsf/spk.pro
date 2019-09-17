@@ -1,7 +1,6 @@
 @extends('layout.dashboard')
 
 @section('content')
-{{-- {{ dd($alternatifs)}} --}}
 
 <div class="container">
     @if ($message = Session::get('success'))
@@ -64,8 +63,8 @@
                                                     <h5 class="modal-title">Edit {{$data->nama}}</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('kriteria.update')}}" method="POST">
-                                                        @csrf
+                                                    <form action="{{route('klasifikasi.update')}}" method="POST">
+                                                        {{ csrf_field() }}
                                                         <input type="hidden" name="id" value="{{$data->id}}">
                                                         <br>
                                                         <div class="form-group">
@@ -81,7 +80,7 @@
                                                         <div class="form-group">
                                                             <h5 class="label-control">Klasifikasi</h5>
                                                             <input autofocus class="form-control" type="text"
-                                                                value="{{$data->klasifikasi}}">
+                                                                name="klasifikasi" value="{{$data->klasifikasi}}">
                                                         </div>
                                                 </div>
                                                 <div class="modal-footer bg-whitesmoke br">
@@ -89,7 +88,6 @@
                                                         data-dismiss="modal">Tutup</button>
                                                     <button type="submit" class="btn btn-md btn-success">Simpan</button>
                                                 </div>
-
                                                 </form>
                                             </div>
                                         </div>
@@ -98,10 +96,8 @@
                             </tr>
                             @endforeach
                         </tbody>
-
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
