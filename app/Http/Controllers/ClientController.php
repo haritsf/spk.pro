@@ -8,6 +8,8 @@ use App\Helpers\Kustom;
 use App\Kriteria;
 use App\Alternatif;
 use App\Evaluasi;
+use App\Klasifikasi;
+use App\Preferensi;
 
 class ClientController extends Controller
 {
@@ -20,18 +22,11 @@ class ClientController extends Controller
 
     public function Data()
     {
-        $cobajoins = DB::table('evals')->select('alternatifs.nama as kecamatan', 'kriterias.nama as kriteria', 'evals.nilai as nilai', 'klasifikasis.klasifikasi as klasifikasi')->join('klasifikasis', 'evals.nilai', '=', 'klasifikasis.nilai')->join('alternatifs', 'evals.alternatif', '=', 'alternatifs.id')->join('kriterias', 'evals.kriteria', '=', 'kriterias.id')->get();
-        // dd($cobajoins);
-        $getalternatifs = Alternatif::get();
-        $getkriterias = Kriteria::get();
-        $getevals = Evaluasi::get();
-        $getall = compact("getalternatifs", "getkriterias", "getevals");
-        // dd($getall);
-        return view(
-            '/pages/client/data',
-            ['getalternatifs' => $getalternatifs],
-            ['getkriterias' => $getkriterias]
-        );
+        $datas['alternatifs'] = Alternatif::get();
+        $datas['kriterias'] = Kriteria::get();
+        $datas['klasifikasis'] = Klasifikasi::get();
+        $datas['prefs'] = Preferensi::get();
+        return view('/pages/client/data', ['datas' => $datas]);
     }
 
     public function Analisa()

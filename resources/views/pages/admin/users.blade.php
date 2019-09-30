@@ -34,7 +34,7 @@
               </div>
                 <div class="form-group mr-3">
                     <h5 class="label-control">Role</h5>
-                    <select class="form-control select2" style="width: 50%" name="role" required>
+                    <select class="form-control select2" data-minimum-results-for-search="-1" style="width: 50%" name="role" required>
                         <option value="Adminstrator">Adminstrator</option>
                         <option value="Manager">Manager</option>
                     </select>
@@ -74,6 +74,7 @@
                                 <td>{{ $data->role }}</td>
                                 <td class="">
                                     <a class="btn btn-warning btn-md" href="{{route('pengguna.edit',$data->id)}}">Edit</a>
+                                    @if ($data->role != "Adminstrator")
                                     <a class="btn btn-danger btn-md" href="" data-toggle="modal" data-target="#modaledit{{$data->id}}">Delete</a>
                                     <div class="modal fade" id="modaledit{{$data->id}}">
                                         <div class="modal-dialog">
@@ -87,14 +88,15 @@
                                                 <div class="modal-footer bg-whitesmoke br">
                                                     <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Tutup</button>
                                                     <form action="{{route('pengguna.delete')}}" method="post">
-                                                      @csrf
-                                                      <input type="hidden" name="id" value="{{$data->id}}">
-                                                    <button type="submit" class="btn btn-md btn-success">Simpan</button>
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{$data->id}}">
+                                                        <button type="submit" class="btn btn-md btn-success">Simpan</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

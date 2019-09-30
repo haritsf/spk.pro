@@ -52,7 +52,8 @@ class AdminController extends Controller
     public function KecamatanRead()
     {
         $alternatifs = Alternatif::all();
-        return view('pages/data/kecamatan/view', ['alternatifs' => $alternatifs]);
+        $datas['getklasifikasi'] = DB::table('klasifikasis')->select('klasifikasis.id', 'kriterias.nama', 'klasifikasis.nilai', 'klasifikasis.klasifikasi')->join('kriterias', 'klasifikasis.kriteria', '=', 'kriterias.id')->get();
+        return view('pages/data/kecamatan/view', ['alternatifs' => $alternatifs], ['datas' => $datas]);
     }
 
     public function KriteriaRead()
@@ -157,7 +158,7 @@ class AdminController extends Controller
         $update->alias = $request->alias;
         $update->role = $request->role;
         $update->save();
-        return redirect(route('pengguna.read'))->with('success', 'User berhasil dibuat');
+        return redirect(route('pengguna.read'))->with('success', 'User berhasil diperbarui');
     }
 
     public function DeletePengguna(Request $request)

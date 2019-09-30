@@ -35,25 +35,38 @@
                                 <thead>
                                     <tr align="center" style="text-transform:lowercase">
                                         <th>Kecamatan</th>
-                                        @foreach ($getkriterias as $get)
-                                        <th>{{$get->nama}}</th>
+                                        @foreach ($datas['kriterias'] as $kriteria)
+                                        <th>{{$kriteria->nama}}</th>
                                         @endforeach
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
-                                    $alternatifs = Kustom::NamaAlternatifs();
-                                    for ($id=1; $id <= Kustom::CountAlternatifs() ; $id++) { 
+                                    for ($id=1; $id <= Kustom::CountAlternatifs(); $id++) { 
                                         echo '<tr align="center">';
-                                        echo '<td align="left">'.$alternatifs[$id-1]['nama'].'</td>';
+                                        echo '<td align="left">'.$datas['alternatifs'][$id-1]['nama'].'</td>';
                                         $getevals = Kustom::JoinanTabel($id);
-                                        // dd($getevals);
                                         foreach ($getevals as $evals) {
                                             echo '<td>' .$evals->nilai.'</td>';
                                         }
                                         echo '</tr>';
                                         }
                                     @endphp
+                                    {{-- @php
+                                    for ($id=1; $id <= Kustom::CountAlternatifs(); $id++) { 
+                                        echo '<tr align="center">';
+                                        echo '<td align="left">'.$datas['alternatifs'][$id-1]['nama'].'</td>';
+                                        $getevals = Kustom::JoinanTabel($id);
+                                        foreach ($getevals as $evals) {
+                                            foreach ($datas['klasifikasis'] as $data) {
+                                                if ($evals->kriteria == $data->kriteria){
+                                                    echo '<td>' .$data->klasifikasi.'</td>';
+                                                }
+                                            }
+                                        }
+                                        echo '</tr>';
+                                    }
+                                    @endphp --}}
                                 </tbody>
                             </table>
                         </div>
@@ -85,15 +98,19 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($getkriterias as $data)
+                                @foreach ($datas['kriterias'] as $data)
                                 <tr align="center">
                                     <td>{{ $data->id }}</td>
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ $data->minmaks }}</td>
-                                    <td>{{ $data->pref }}</td>
+                                    @foreach ($datas['prefs'] as $pref)
+                                        @if ($data->pref == $pref->id)
+                                            <td>{{ $pref->nama }}</td>
+                                        @endif
+                                    @endforeach
                                     <td>{{ $data->q }}</td>
                                     <td>{{ $data->p }}</td>
-                                    <td>{{ $data->bobot }}</td>
+                                    <td>{{ $data->bobot . '%' }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

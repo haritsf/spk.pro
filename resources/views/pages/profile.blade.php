@@ -31,13 +31,6 @@
               <h5 class="label-control">Alias</h5>
               <input class="form-control" type="text" name="alias" value="{{$data->alias}}">
             </div>
-            {{-- <div class="form-group mr-3">
-                  <h5 class="label-control">Role</h5>
-                  <select class="form-control select2" name="role" value="{{$data->role}}" required>
-            <option value="Adminstrator">Adminstrator</option>
-            <option value="Manager">Manager</option>
-            </select>
-        </div> --}}
         <button class="btn btn-success btn-md" type="submit">Proses</button>
         </form>
       </div>

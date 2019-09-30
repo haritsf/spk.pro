@@ -77,29 +77,31 @@
             <div class="col-md">
               <h6 class="label-control">Kelerengan</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Kelerengan')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Penggunaan Lahan</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Penggunaan Lahan')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Rawan Bencana Longsor</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Rawan Bencana Longsor')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
           </div>
@@ -107,28 +109,31 @@
             <div class="col-md">
               <h6 class="label-control">Curah Hujan</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Curah Hujan')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Cadangan Air Tanah</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Cadangan Air Tanah')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
             <div class="col-md">
               <h6 class="label-control">Jenis Tanah</h6>
               <select class="form-control select2" style="width: 100%" name="kriteria[]" data-minimum-results-for-search="-1" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                @foreach ($datas['getklasifikasi'] as $data)
+                  @if ($data->nama == 'Jenis Tanah')
+                    <option value={{$data->nilai}}>{{$data->klasifikasi}}</option>
+                  @endif
+                @endforeach
               </select>
             </div>
           </div>

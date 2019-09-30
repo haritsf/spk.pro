@@ -23,9 +23,13 @@
           </div>
           <div class="form-group mr-3">
             <h5 class="label-control">Role</h5>
-            <select class="form-control select2" name="role" value="{{$data->role}}" required>
+            <select class="form-control select2" data-minimum-results-for-search="-1" name="role" value="{{$data->role}}" required>
+              <option name="role" value="{{$data->role}}">{{$data->role}}</option>
+              @if ($data->role == 'Manager')
               <option value="Adminstrator">Adminstrator</option>
+              @elseif ($data->role != 'Manager')
               <option value="Manager">Manager</option>
+              @endif
             </select>
           </div>
           <button class="btn btn-success btn-md" type="submit">Proses</button>
