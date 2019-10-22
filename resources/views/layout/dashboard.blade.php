@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="icon" type="image/png" href="{{url('img/favicon-32x32.png')}}" sizes="32x32">
   <link rel="icon" type="image/png" href="{{url('img/favicon-16x16.png')}}" sizes="16x16">
-  <title>spk.pro - @yield('title')</title>
+  <title>spk.pro • @yield('title')</title>
   <link rel="stylesheet" href="{{url('modules/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}">
   <link rel="stylesheet" href="{{url('modules/fontawesome/css/all.min.css')}}">
