@@ -6,32 +6,32 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     name="viewport">
   <title>spk.pro</title>
-  <link rel="icon" type="image/png" href="{{url('img/favicon-32x32.png')}}" sizes="32x32">
-  <link rel="icon" type="image/png" href="{{url('img/favicon-16x16.png')}}" sizes="16x16">
-  <link rel="stylesheet" href="{{url('modules/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{url('modules/bootstrap-social/bootstrap-social.css')}}">
-  <link rel="stylesheet" href="{{url('modules/fontawesome/css/all.min.css')}}">
-  <link rel="stylesheet" href="{{url('css/style.min.css')}}">
-  <link rel="stylesheet" href="{{url('css/components.min.css')}}">
-  {{-- <link rel="stylesheet" href="{{url('css/style.css')}}">
-  <link rel="stylesheet" href="{{url('css/components.css')}}"> --}}
-  <link rel="stylesheet" href="{{url('css/custom.css')}}">
-  <link rel="stylesheet" href="{{url('css/landing.css')}}">
-  <link rel="stylesheet" href="{{url('css/aos.css')}}">
-  <link rel="stylesheet" href="{{url('css/animate.css')}}">
-  <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}">
+  <link rel="icon" type="image/png" href="{{asset('img/favicon-32x32.png')}}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{asset('img/favicon-16x16.png')}}" sizes="16x16">
+  <link rel="stylesheet" href="{{asset('modules/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/bootstrap-social/bootstrap-social.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/fontawesome/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/style.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/components.min.css')}}">
+  {{-- <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('css/components.css')}}"> --}}
+  <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+  <link rel="stylesheet" href="{{asset('css/landing.css')}}">
+  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+  <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/datatables/datatables.min.css')}}">
 
-  <script src="{{url('modules/datatables/datatables.min.js')}}"></script>
-  <script src="{{url('modules/jquery.min.js')}}"></script>
-  <script src="{{url('modules/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="{{url('js/stisla.js')}}"></script>
-  <script src="{{url('js/landing.js')}}"></script>
-  <script src="{{url('js/aos.js')}}"></script>
+  <script src="{{asset('modules/datatables/datatables.min.js')}}"></script>
+  <script src="{{asset('modules/jquery.min.js')}}"></script>
+  <script src="{{asset('modules/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/stisla.js')}}"></script>
+  <script src="{{asset('js/landing.js')}}"></script>
+  <script src="{{asset('js/aos.js')}}"></script>
 
   <style>
     @font-face {
       font-family: Product Sans;
-      src: url({{url('fonts/productsans.ttf')}});
+      src: url({{asset('fonts/productsans.ttf')}});
     }
   </style>
 
@@ -62,13 +62,13 @@
 
         <ul class="navbar-nav mr-auto ml-lg-3 align-items-lg-center" style="font-weight:normal">
           <li class="nav-item">
-            <a href="{{route('client.data')}}" class="nav-link">Data</a>
+            <a href="{{route('client.data')}}" class="nav-link {{ Request::is('data') ? 'bg-dark' : '' }}">Data</a>
           </li>
           <li class="nav-item">
-            <a href="{{route('client.analisa')}}" class="nav-link">Analisa</a>
+            <a href="{{route('client.analisa')}}" class="nav-link {{ Request::is('analisa') ? 'bg-dark' : '' }}">Analisa</a>
           </li>
           <li class="nav-item">
-            <a href="{{route('client.pemalang')}}" class="nav-link">Pemalang</a>
+            <a href="{{route('client.pemalang')}}" class="nav-link {{ Request::is('pemalang') ? 'bg-dark' : '' }}">Pemalang</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto align-items-lg-center d-none d-lg-block">
@@ -143,7 +143,7 @@
   <script>
     AOS.init();
   </script>
-  <script src="{{url('js/jquery.nav.js')}}"></script>
+  <script src="{{asset('js/jquery.nav.js')}}"></script>
   <script>
     $(document).ready(function() {
           $('#nav').onePageNav();

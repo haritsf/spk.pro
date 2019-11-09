@@ -5,34 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" type="image/png" href="{{url('img/favicon-32x32.png')}}" sizes="32x32">
-  <link rel="icon" type="image/png" href="{{url('img/favicon-16x16.png')}}" sizes="16x16">
+  <link rel="icon" type="image/png" href="{{asset('img/favicon-32x32.png')}}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{asset('img/favicon-16x16.png')}}" sizes="16x16">
   <title>spk.pro • @yield('title')</title>
-  <link rel="stylesheet" href="{{url('modules/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{url('modules/datatables/datatables.min.css')}}">
-  <link rel="stylesheet" href="{{url('modules/fontawesome/css/all.min.css')}}">
-  <link rel="stylesheet" href="{{url('modules/select2/dist/css/select2.min.css')}}">
-  <link rel="stylesheet" href="{{url('css/style.min.css')}}">
-  <link rel="stylesheet" href="{{url('css/components.min.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/datatables/datatables.min.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/fontawesome/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('modules/select2/dist/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/style.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/components.min.css')}}">
 
   <style>
     @font-face {
       font-family: Product Sans;
-      src: url({{url('fonts/productsans.ttf')}});
+      src: url({{asset('fonts/productsans.ttf')}});
     }
   </style>
-  <script src="{{url('modules/jquery.min.js')}}"></script>
-  <script src="{{url('modules/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="{{url('modules/datatables/datatables.min.js')}}"></script>
-  <script src="{{url('modules/select2/dist/js/select2.full.min.js')}}"></script>
-  <script src="{{url('js/lodash.js')}}"></script>
-  <script src="{{url('modules/popper.js')}}"></script>
-  <script src="{{url('modules/tooltip.js')}}"></script>
-  <script src="{{url('modules/nicescroll/jquery.nicescroll.min.js')}}"></script>
-  <script src="{{url('js/stisla.js')}}"></script>
-  <script src="{{url('js/scripts.js')}}"></script>
-  <script src="{{url('js/custom.js')}}"></script>
-  <script src="{{url('modules/jquery-ui/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('modules/jquery.min.js')}}"></script>
+  <script src="{{asset('modules/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('modules/datatables/datatables.min.js')}}"></script>
+  <script src="{{asset('modules/select2/dist/js/select2.full.min.js')}}"></script>
+  <script src="{{asset('js/lodash.js')}}"></script>
+  <script src="{{asset('modules/popper.js')}}"></script>
+  <script src="{{asset('modules/tooltip.js')}}"></script>
+  <script src="{{asset('modules/nicescroll/jquery.nicescroll.min.js')}}"></script>
+  <script src="{{asset('js/stisla.js')}}"></script>
+  <script src="{{asset('js/scripts.js')}}"></script>
+  <script src="{{asset('js/custom.js')}}"></script>
+  <script src="{{asset('modules/jquery-ui/jquery-ui.min.js')}}"></script>
   <script>
     $(document).ready(function() {
         $('#DataTables, #Tables').DataTable({
@@ -98,7 +98,7 @@
       <ul class="navbar-nav navbar-right">
         <li class="dropdown beep"><a href="#" data-toggle="dropdown"
             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{{url('img/avatar/avatar-1.png')}}" class="rounded-circle mr-2">
+            <img alt="image" src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle mr-2">
             <div class="d-sm-none d-lg-inline-block" style="font-weight:normal">Hallo, {{Auth::user()->alias}}</div>
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow rounded">
